@@ -94,10 +94,5 @@ If you have run out of energy or time for your project, put a note at the top of
 
 docker pull pdunkel/kernalpanic-timerecording:latest
 
-docker run -d `
-  -p 8080:8080 `
-  -e SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/timerecording" `
-  -e SPRING_DATASOURCE_USERNAME="timerecording_user" `
-  -e SPRING_DATASOURCE_PASSWORD="secure_password123" `
-  --name kernelpanic `
-  pdunkel/kernalpanic-timerecording:latest
+docker run -d -p 8080:8080
+  -e SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/timerecording" -e SPRING_DATASOURCE_USERNAME="timerecording_user" -e SPRING_DATASOURCE_PASSWORD="secure_password123" --name kernelpanic pdunkel/kernalpanic-timerecording:latest
