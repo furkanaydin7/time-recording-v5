@@ -13,7 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    image: kernalpanic-timerecording # Name des lokalen Images
+    image: pdunkel/kernalpanic-timerecording:latest # Name des lokalen Images
     container_name: kernelpanic-timerecording_app
     depends_on:
       - db
