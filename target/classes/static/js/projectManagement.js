@@ -1,4 +1,6 @@
 // * @author EK
+//Code überarbeitet mit ChatGPT
+
 let currentProjectForEditing = null;
 let availableManagers = [];
 

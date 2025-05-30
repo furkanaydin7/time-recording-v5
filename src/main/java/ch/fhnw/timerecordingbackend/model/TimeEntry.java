@@ -12,7 +12,6 @@ import java.util.Set;
  * Entität Klasse für Zeiteinträge
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.2 - Quellenbezeichnung angepasst
  */
 @Entity
 @Table(name = "time_entries")
@@ -211,7 +210,6 @@ public class TimeEntry {
     /**
      * String-Repräsentation des Zeiteintrags
      * @return String-Repräsentation des Zeiteintrags
-     * Quelle: chatgpt.com
      */
     @Override
     public String toString() {

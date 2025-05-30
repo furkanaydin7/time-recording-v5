@@ -19,7 +19,6 @@ import java.util.Optional;
  * Implementierung ProjectService
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -241,7 +240,7 @@ public class ProjectServiceImpl implements ProjectService{
 
         if (results != null && !results.isEmpty()) {
             Object resultValue = results.get(0)[0];
-            if (resultValue instanceof Number) { // Sicherstellen, dass es sich um eine Zahl handelt
+            if (resultValue instanceof Number) {
                 Double totalMinutes = ((Number) resultValue).doubleValue();
                 long hours = (long) (totalMinutes / 60);
                 long minutes = (long) (totalMinutes % 60);
@@ -251,7 +250,7 @@ public class ProjectServiceImpl implements ProjectService{
         return "00:00";
     }
 
-    // Hilfsmethode, um HH:mm String in Minuten zu parsen
+    // Hilfsmethode, um HH:mm String in Minuten parsen
     private double parseHoursToMinutes(String timeString) {
         if (timeString == null || timeString.trim().isEmpty()) {
             return 0.0;
@@ -271,7 +270,6 @@ public class ProjectServiceImpl implements ProjectService{
      */
     @Override
     public List<User> findUsersByProjectId(Long projectId) {
-        // Dies wird alle Benutzer zurückgeben, die jemals Stunden auf dieses Projekt gebucht haben
         return timeEntryRepository.findDistinctUsersByProjectId(projectId);
     }
 

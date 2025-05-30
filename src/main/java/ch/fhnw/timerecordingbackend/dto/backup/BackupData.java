@@ -9,11 +9,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Datenstruktur für Backup-Inhalte.
- * Enthält Benutzer, Projekte, Zeiteinträge und Abwesenheiten mit Zeitstempel.
- * Wird für Export und Wiederherstellung verwendet.
+ * DTO für Backup-Daten, enthält alle exportierbaren Entitäten inklusive Zeitstempel.
+ * Verwendet für den Export und die Wiederherstellung von Systemzuständen.
+ * Beinhaltet Benutzer-, Projekt-, Zeiteintrags- und Abwesenheitsdaten.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 public class BackupData {
     private LocalDateTime backupTimestamp;

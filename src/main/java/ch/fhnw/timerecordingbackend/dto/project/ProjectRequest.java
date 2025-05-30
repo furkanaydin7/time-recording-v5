@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
  * DTO Anfragen zum Erstellen und aktualisieren von Projekten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  * Quelle: https://medium.com/paysafe-bulgaria/springboot-dto-validation-good-practices-and-breakdown-fee69277b3b0
  */
 public class ProjectRequest {

@@ -13,7 +13,6 @@ import java.util.Optional;
  * Repository für Projekt Entität
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.1 - Quellenbezeichnung angepasst
  */
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {

@@ -15,7 +15,6 @@ import java.util.List;
  * Repository für Absence Entitäten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
 
@@ -88,7 +87,7 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
      * @param startDate
      * @param endDate
      * @return Long mit der Summe der genehmigten Abwesenheiten eines Benutzers für einen bestimmten Zeitraum.
-     * Quelle: ChatGPT.com
+     * @author FA
      */
     @Query(
             value = "SELECT SUM(DATEDIFF('DAY', a.start_date, a.end_date)) " +

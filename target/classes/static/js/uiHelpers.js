@@ -1,4 +1,5 @@
 // * @author EK
+//Kommentare erstellt mit CHatGPT, Code bereinigt mit CHatGPT
 
 function closeModal(modalId) {
     console.log('Versuche Modal zu schließen:', modalId);
@@ -335,8 +336,6 @@ function formatAbsencesTable(absences) {
             processedByDisplay = absence.processedByName;
         }
 
-        // JSON-String des Abwesenheitsobjekts für die Übergabe an die Bearbeitungsfunktion
-        // Sonderzeichen im JSON-String für HTML-Attribute escapen
         const absenceJsonString = JSON.stringify(absence)
             .replace(/'/g, "&apos;")
             .replace(/"/g, "&quot;");

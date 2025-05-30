@@ -14,6 +14,13 @@ import jakarta.validation.Valid;
 
 import java.util.Map;
 
+/**
+ * REST-Controller für Authentifizierungsoperationen (Login & Logout).
+ * Behandelt Anfragen an /api/auth.
+ * @author FA
+ * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -21,6 +28,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * Führt eine Login-Authentifizierung durch.
+     * Erwartet E-Mail und Passwort als JSON (LoginRequest), validiert die Daten,
+     * und liefert bei Erfolg ein JWT mit Benutzerdaten zurück.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         try {
@@ -45,6 +57,10 @@ public class AuthController {
         }
     }
 
+    /**
+     * Führt einen Logout durch, indem das übermittelte JWT-Token ungültig gemacht wird (Blacklist).
+     * Erwartet das Token im Request-Body als String.
+     */
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody String token) {
         authService.logout(token);

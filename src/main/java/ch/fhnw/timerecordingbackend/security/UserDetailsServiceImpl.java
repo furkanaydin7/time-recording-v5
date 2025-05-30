@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  * Wandelt Benutzerrollen in Spring Security Authorities um
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

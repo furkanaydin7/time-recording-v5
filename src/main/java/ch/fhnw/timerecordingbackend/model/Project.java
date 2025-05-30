@@ -10,7 +10,6 @@ import java.util.Set;
  * Entität Klasse für Projekte
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Entity
 @Table(name = "projects")
@@ -83,7 +82,6 @@ public class Project {
 
     /**
      * Getter und Setter
-     * Automatisch generiert mit IntelliJ
      */
     public Long getId() {
         return id;

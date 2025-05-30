@@ -1,4 +1,6 @@
 // * @author EK
+//Kommentare erstellt mit @ChatGPT
+//Code bereinigt mit ChatGPT
 
 console.log('admin.js geladen');
 window.selectedUserForDetails = null;
@@ -214,6 +216,17 @@ async function showUserDetails(userId) {
         document.getElementById('detailUserEmail').textContent = user.email;
         document.getElementById('detailUserStatus').textContent = user.status ? String(user.status) : (user.active ? 'Aktiv' : 'Inaktiv');
         document.getElementById('detailUserPlannedHours').textContent = user.plannedHoursPerDay ? user.plannedHoursPerDay.toFixed(1) : 'N/A';
+
+        // Manager-Informationen anzeigen
+        const managerSpan = document.getElementById('detailUserDirectManager');
+        if (managerSpan) {
+            if (user.managerName) { // Prüfen, ob managerName vorhanden ist
+                managerSpan.textContent = user.managerName;
+            } else {
+                managerSpan.textContent = 'Kein Manager zugewiesen';
+            }
+        }
+
         document.getElementById('detailUserCreatedAt').textContent = formatDateTimeDisplay(user.createdAt);
         document.getElementById('detailUserUpdatedAt').textContent = formatDateTimeDisplay(user.updatedAt);
 
@@ -304,9 +317,8 @@ async function viewSystemLogs() {
             if (response.logs.length === 0) {
                 html += '<p>Keine System-Logs gefunden.</p>';
             } else {
-                // Status Spalte hinzugefügt für bessere Übersicht
                 html += '<table class="data-table"><thead><tr><th>Timestamp</th><th>User</th><th>Action</th><th>Details</th><th>Status</th></tr></thead><tbody>';
-                response.logs.forEach(logEntry => { // Hier logEntry statt log, um Verwechslung zu vermeiden, aber log ist auch ok
+                response.logs.forEach(logEntry => {
                     html += `<tr>
                                 <td>${logEntry.timestamp ? formatDateTimeDisplay(logEntry.timestamp) : '-'}</td>
                                 <td>${logEntry.userEmail || (logEntry.userId ? `ID: ${logEntry.userId}` : 'System')}</td>
@@ -368,13 +380,11 @@ async function viewPasswordResetRequests() {
             showWarning("System-Logs konnten nicht geladen werden. Passwort-Reset-Anfragen können nicht angezeigt werden.");
         }
     } catch (error) {
-        // Der Fehler "log is not defined" wird hier abgefangen.
         console.error("Fehlerdetails in viewPasswordResetRequests:", error); // Zusätzliches Logging des Fehlers selbst
         showError('Fehler beim Laden der Passwort-Reset-Anfragen: ' + (error.message || "Unbekannt"));
     }
 }
 
-// Die Funktion handleResetPasswordFromAdminView (mit dem erweiterten Logging für den confirm-Dialog)
 async function handleResetPasswordFromAdminView(userId, userEmail, logId) {
     console.log(`[DEBUG Admin.js] handleResetPasswordFromAdminView: Start.`);
     console.log(`[DEBUG Admin.js] Übergebene userId: ${userId} (Typ: ${typeof userId}), userEmail: ${userEmail}, logId: ${logId}`); // Wichtig!
@@ -388,7 +398,7 @@ async function handleResetPasswordFromAdminView(userId, userEmail, logId) {
     console.log(`[DEBUG Admin.js] Parsed numUserId: ${numUserId} (Typ: ${typeof numUserId})`); // Wichtig!
 
     const confirmMsg = `Möchten Sie das Passwort für ${userEmail} (ID: ${numUserId}) wirklich zurücksetzen? Der Benutzer wird darüber nicht automatisch benachrichtigt.`;
-    //
+
     let userConfirmed;
     try {
         userConfirmed = confirm(confirmMsg);
@@ -408,6 +418,7 @@ async function handleResetPasswordFromAdminView(userId, userEmail, logId) {
             if (response && response.temporaryPassword) {
                 showSuccess(`Passwort für ${userEmail || `ID ${numUserId}`} erfolgreich zurückgesetzt. Temporäres Passwort: <strong>${response.temporaryPassword}</strong>. Bitte teilen Sie dieses Passwort dem Benutzer sicher mit.`);
                 console.log(`[DEBUG] Passwort erfolgreich zurückgesetzt für User ID ${numUserId}. Temporäres Passwort: ${response.temporaryPassword}`);
+                alert(`Das temporäre Passwort für ${userEmail || `ID ${numUserId}`} lautet: ${response.temporaryPassword}\nBitte teilen Sie es dem Benutzer sicher mit.`);
                 viewPasswordResetRequests();
             } else {
                 showError('Passwort-Reset durchgeführt, aber kein temporäres Passwort erhalten oder Antwort war unerwartet.');
@@ -461,11 +472,17 @@ function initializeAdminFeatures() {
                 // Der Event-Listener wird in dashboard.js hinzugefügt
             }
         }
-        if (createProjectBtn) createProjectBtn.style.display = 'inline-block';
-    } else {
+    } else { // Wenn nicht Admin
         if (adminCard) adminCard.style.display = 'none';
-        if (createProjectBtn) createProjectBtn.style.display = 'none';
     }
+
+    // Zeigt den "Neues Projekt" Button für Admins UND Manager an
+    if (createProjectBtn && (isAdmin || isManager)) {
+        createProjectBtn.style.display = 'inline-block';
+    } else if (createProjectBtn) {
+        createProjectBtn.style.display = 'none';
+    }
+
 
     if (isAdmin || isManager) {
         if (viewPendingAbsencesBtn) viewPendingAbsencesBtn.style.display = 'inline-block';

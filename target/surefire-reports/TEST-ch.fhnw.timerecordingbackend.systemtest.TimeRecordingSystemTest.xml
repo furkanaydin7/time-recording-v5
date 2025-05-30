@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="14.764" tests="31" errors="0" skipped="0" failures="2">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/Furkan/IdeaProjects/time-recording-backend/target/test-classes:/Users/Furkan/IdeaProjects/time-recording-backend/target/classes:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/Furkan/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/Furkan/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/Furkan/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/Furkan/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/Furkan/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/Furkan/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/Furkan/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/Furkan/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/Furkan/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/Furkan/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/Furkan/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/Furkan/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/Furkan/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/Furkan/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/Furkan/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/Furkan/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/Furkan/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/Furkan/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/Furkan/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/Furkan/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/Furkan/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/Furkan/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/Furkan/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/Furkan/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/Furkan/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/Furkan/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/Furkan/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/Furkan/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/Furkan/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/Furkan/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/Furkan/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/Furkan/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/Furkan/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-devtools/3.4.4/spring-boot-devtools-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/Furkan/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/Furkan/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/Furkan/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/Furkan/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/Furkan/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/Furkan/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/Furkan/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/Furkan/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/Furkan/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/Furkan/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/Furkan/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/Furkan/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/Furkan/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/Furkan/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/Furkan/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/Furkan/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/Furkan/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/Furkan/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/Furkan/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/Furkan/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/Furkan/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Europe/Zurich"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="APPLICATION_NAME" value="time-recording-backend-test"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CH"/>
+    <property name="sun.boot.library.path" value="/Users/Furkan/Library/Java/JavaVirtualMachines/temurin-17.0.15/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/Furkan/IdeaProjects/time-recording-backend/target/surefire/surefirebooter-20250530215134221_3.jar /Users/Furkan/IdeaProjects/time-recording-backend/target/surefire 2025-05-30T21-51-34_113-jvmRun1 surefire-20250530215134221_1tmp surefire_0-20250530215134221_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/Furkan/IdeaProjects/time-recording-backend/target/test-classes:/Users/Furkan/IdeaProjects/time-recording-backend/target/classes:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/Furkan/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/Furkan/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/Furkan/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/Furkan/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/Furkan/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/Furkan/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/Furkan/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/Furkan/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/Furkan/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/Furkan/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/Furkan/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/Furkan/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/Furkan/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/Furkan/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/Furkan/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/Furkan/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/Furkan/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/Furkan/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/Furkan/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/Furkan/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/Furkan/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/Furkan/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/Furkan/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/Furkan/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/Furkan/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/Furkan/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/Furkan/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/Furkan/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/Furkan/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/Furkan/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/Furkan/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/Furkan/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/Furkan/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/Furkan/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/Furkan/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-devtools/3.4.4/spring-boot-devtools-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/Furkan/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/Furkan/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/Furkan/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/Furkan/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/Furkan/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/Furkan/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/Furkan/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/Furkan/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/Furkan/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/Furkan/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/Furkan/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/Furkan/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/Furkan/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/Furkan/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/Furkan/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/Furkan/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/Furkan/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/Furkan/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/Furkan/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/Furkan/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/Furkan/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/Furkan/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/Furkan/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/Furkan/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/Users/Furkan/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/Furkan/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/Furkan"/>
+    <property name="user.language" value="de"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="/Users/Furkan/Library/Java/JavaVirtualMachines/temurin-17.0.15/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/Furkan/IdeaProjects/time-recording-backend"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/Users/Furkan/IdeaProjects/time-recording-backend/target/surefire/surefirebooter-20250530215134221_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.15+6"/>
+    <property name="user.name" value="Furkan"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.5"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.15+6"/>
+    <property name="localRepository" value="/Users/Furkan/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/8p/yrcdsztj5czgfy0cl92cl2g80000gn/T/"/>
+    <property name="idea.version" value="2025.1.1.1"/>
+    <property name="catalina.home" value="/private/var/folders/8p/yrcdsztj5czgfy0cl92cl2g80000gn/T/tomcat.0.12191433548863044874"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="17.0.15"/>
+    <property name="user.dir" value="/Users/Furkan/IdeaProjects/time-recording-backend"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="17599"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="catalina.base" value="/private/var/folders/8p/yrcdsztj5czgfy0cl92cl2g80000gn/T/tomcat.0.12191433548863044874"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/Furkan/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.15+6"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[time-recording-backend-test] "/>
+  </properties>
+  <testcase name="testAdminLogin" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="1.305">
+    <system-out><![CDATA[21:51:35.560 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest]: TimeRecordingSystemTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:51:35.716 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ch.fhnw.timerecordingbackend.TimeRecordingBackendApplication for test class ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest
+21:51:35.866 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2025-05-30T21:51:36.301+02:00  INFO 17599 --- [time-recording-backend-test] [           main] c.f.t.s.TimeRecordingSystemTest          : Starting TimeRecordingSystemTest using Java 17.0.15 with PID 17599 (started by Furkan in /Users/Furkan/IdeaProjects/time-recording-backend)
+2025-05-30T21:51:36.303+02:00  INFO 17599 --- [time-recording-backend-test] [           main] c.f.t.s.TimeRecordingSystemTest          : The following 1 profile is active: "test"
+2025-05-30T21:51:37.540+02:00  INFO 17599 --- [time-recording-backend-test] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-30T21:51:37.683+02:00  INFO 17599 --- [time-recording-backend-test] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 133 ms. Found 7 JPA repository interfaces.
+2025-05-30T21:51:38.533+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2025-05-30T21:51:38.542+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-30T21:51:38.542+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-30T21:51:38.579+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-30T21:51:38.580+02:00  INFO 17599 --- [time-recording-backend-test] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2246 ms
+2025-05-30T21:51:38.769+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-30T21:51:38.806+02:00  INFO 17599 --- [time-recording-backend-test] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-30T21:51:38.829+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-30T21:51:39.023+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-30T21:51:39.044+02:00  INFO 17599 --- [time-recording-backend-test] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-30T21:51:39.243+02:00  INFO 17599 --- [time-recording-backend-test] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-30T21:51:39.261+02:00  INFO 17599 --- [time-recording-backend-test] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-30T21:51:39.294+02:00  WARN 17599 --- [time-recording-backend-test] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-30T21:51:39.322+02:00  INFO 17599 --- [time-recording-backend-test] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-30T21:51:40.869+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-30T21:51:40.938+02:00  INFO 17599 --- [time-recording-backend-test] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-30T21:51:41.273+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-30T21:51:42.840+02:00  INFO 17599 --- [time-recording-backend-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-05-30T21:51:42.966+02:00  WARN 17599 --- [time-recording-backend-test] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-30T21:51:43.063+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-05-30T21:51:43.464+02:00 DEBUG 17599 --- [time-recording-backend-test] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-05-30T21:51:44.096+02:00  INFO 17599 --- [time-recording-backend-test] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 64729 (http) with context path '/'
+2025-05-30T21:51:44.111+02:00  INFO 17599 --- [time-recording-backend-test] [           main] c.f.t.s.TimeRecordingSystemTest          : Started TimeRecordingSystemTest in 8.25 seconds (process running for 9.772)
+🚀 DataInitializer gestartet - Erstelle Initialdaten...
+📋 Erstelle Standard-Rollen...
+  ✓ Rolle erstellt: ADMIN
+  ✓ Rolle erstellt: MANAGER
+  ✓ Rolle erstellt: EMPLOYEE
+👤 Erstelle Admin-Benutzer...
+  ✓ Admin-Benutzer erstellt: admin@timerecording.ch (Passwort: admin123)
+👥 Erstelle Beispiel-Benutzer...
+  ✓ Manager erstellt: manager@timerecording.ch (Passwort: manager123)
+  ✓ Mitarbeiter erstellt: anna.schmidt@timerecording.ch (Passwort: employee123, Manager: Max Manager)
+  ✓ Mitarbeiter erstellt: peter.mueller@timerecording.ch (Manager: Max Manager)
+  ✓ Mitarbeiter erstellt: laura.weber@timerecording.ch (Passwort: employee123)
+  ✓ Mitarbeiter erstellt: thomas.fischer@timerecording.ch (Passwort: employee123)
+📁 Erstelle Beispiel-Projekte...
+  ✓ Projekt erstellt: Website Redesign
+  ✓ Projekt erstellt: Mobile App Development
+  ✓ Projekt erstellt: Database Migration
+🏖️ Erstelle Beispiel-Abwesenheiten...
+  ✓ Urlaub für Laura Weber erstellt (genehmigt)
+  ✓ Fortbildung für Thomas Fischer erstellt (ausstehend)
+  ✓ Home Office für Anna Schmidt erstellt (genehmigt)
+  ✓ Sonderurlaub für Peter Müller erstellt (ausstehend)
+✅ Initialdaten erfolgreich erstellt!
+2025-05-30T21:51:45.781+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-30T21:51:45.783+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-30T21:51:45.787+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-05-30T21:51:45.799+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-05-30T21:51:45.804+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:45.805+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2025-05-30T21:51:45.910+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] c.f.t.service.AuthServiceImpl            : Login-Versuch für: admin@timerecording.ch
+2025-05-30T21:51:45.923+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] c.f.t.service.AuthServiceImpl            : 🔍 Benutzer gefunden: admin@timerecording.ch mit 1 Rollen
+2025-05-30T21:51:46.058+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2025-05-30T21:51:46.103+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] c.f.t.service.AuthServiceImpl            : 🔍 Alle Rollen für admin@timerecording.ch: [ADMIN]
+2025-05-30T21:51:46.104+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] c.f.t.service.AuthServiceImpl            : ✅ Login erfolgreich für: admin@timerecording.ch mit Rollen: [ADMIN]
+Admin Login erfolgreich
+]]></system-out>
+  </testcase>
+  <testcase name="testManagerLogin" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.102">
+    <system-out><![CDATA[2025-05-30T21:51:46.204+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-05-30T21:51:46.205+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:46.205+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2025-05-30T21:51:46.207+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] c.f.t.service.AuthServiceImpl            : Login-Versuch für: manager@timerecording.ch
+2025-05-30T21:51:46.213+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] c.f.t.service.AuthServiceImpl            : 🔍 Benutzer gefunden: manager@timerecording.ch mit 1 Rollen
+2025-05-30T21:51:46.277+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2025-05-30T21:51:46.281+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] c.f.t.service.AuthServiceImpl            : 🔍 Alle Rollen für manager@timerecording.ch: [MANAGER]
+2025-05-30T21:51:46.282+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] c.f.t.service.AuthServiceImpl            : ✅ Login erfolgreich für: manager@timerecording.ch mit Rollen: [MANAGER]
+Manager Login erfolgreich
+]]></system-out>
+  </testcase>
+  <testcase name="testEmployeeLogin" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.091">
+    <system-out><![CDATA[2025-05-30T21:51:46.305+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-05-30T21:51:46.306+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:46.306+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2025-05-30T21:51:46.308+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] c.f.t.service.AuthServiceImpl            : Login-Versuch für: anna.schmidt@timerecording.ch
+2025-05-30T21:51:46.314+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] c.f.t.service.AuthServiceImpl            : 🔍 Benutzer gefunden: anna.schmidt@timerecording.ch mit 1 Rollen
+2025-05-30T21:51:46.378+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2025-05-30T21:51:46.380+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] c.f.t.service.AuthServiceImpl            : 🔍 Alle Rollen für anna.schmidt@timerecording.ch: [EMPLOYEE]
+2025-05-30T21:51:46.381+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] c.f.t.service.AuthServiceImpl            : ✅ Login erfolgreich für: anna.schmidt@timerecording.ch mit Rollen: [EMPLOYEE]
+Employee Login erfolgreich
+]]></system-out>
+  </testcase>
+  <testcase name="testInvalidLogin" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.024">
+    <system-out><![CDATA[2025-05-30T21:51:46.404+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-05-30T21:51:46.404+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:46.404+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2025-05-30T21:51:46.406+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] c.f.t.service.AuthServiceImpl            : Login-Versuch für: invalid@test.com
+Invalid Login korrekt abgelehnt
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateUser" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.187">
+    <system-out><![CDATA[2025-05-30T21:51:46.442+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/admin/users
+2025-05-30T21:51:46.461+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/admin/users
+2025-05-30T21:51:46.491+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.createUser(ch.fhnw.timerecordingbackend.dto.admin.UserRegistrationRequest); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:46.523+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.createUser(ch.fhnw.timerecordingbackend.dto.admin.UserRegistrationRequest); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:46.588+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] c.f.t.service.UserServiceImpl            : Benutzer test.user@timerecording.ch wird ohne direkten Manager erstellt.
+Neuer User erstellt mit ID: 7
+]]></system-out>
+  </testcase>
+  <testcase name="testGetAllUsers" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.046">
+    <system-out><![CDATA[2025-05-30T21:51:46.622+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2025-05-30T21:51:46.632+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2025-05-30T21:51:46.636+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getAllUsers(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:46.637+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getAllUsers(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+User-Liste abgerufen: 7 Users
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateUserStatus" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.049">
+    <system-out><![CDATA[2025-05-30T21:51:46.665+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Securing PATCH /api/admin/users/7/status?status=INACTIVE
+2025-05-30T21:51:46.679+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Secured PATCH /api/admin/users/7/status?status=INACTIVE
+2025-05-30T21:51:46.683+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.changeUserStatus(java.lang.Long,ch.fhnw.timerecordingbackend.model.enums.UserStatus); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:46.683+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.changeUserStatus(java.lang.Long,ch.fhnw.timerecordingbackend.model.enums.UserStatus); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+User Status erfolgreich geändert
+]]></system-out>
+  </testcase>
+  <testcase name="testSubmitRegistrationRequest" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.045">
+    <system-out><![CDATA[2025-05-30T21:51:46.716+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /api/public/registration-requests
+2025-05-30T21:51:46.717+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:46.717+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Secured POST /api/public/registration-requests
+Registrierungsanfrage eingereicht
+]]></system-out>
+  </testcase>
+  <testcase name="testGetPendingRegistrationRequests" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.04">
+    <system-out><![CDATA[2025-05-30T21:51:46.760+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/registration-requests/pending
+2025-05-30T21:51:46.775+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/registration-requests/pending
+2025-05-30T21:51:46.776+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getPendingRegistrationRequests(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:46.777+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getPendingRegistrationRequests(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+Pending Registration Requests abgerufen: 1
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateProject" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.046">
+    <system-out><![CDATA[2025-05-30T21:51:46.805+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/projects
+2025-05-30T21:51:46.814+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/projects
+2025-05-30T21:51:46.821+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.createProject(ch.fhnw.timerecordingbackend.dto.project.ProjectRequest); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+2025-05-30T21:51:46.822+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.createProject(ch.fhnw.timerecordingbackend.dto.project.ProjectRequest); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+Projekt erstellt mit ID: 4
+]]></system-out>
+  </testcase>
+  <testcase name="testGetActiveProjects" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.065">
+    <failure message="expected: &lt;200 OK&gt; but was: &lt;500 INTERNAL_SERVER_ERROR&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <200 OK> but was: <500 INTERNAL_SERVER_ERROR>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest.testGetActiveProjects(TimeRecordingSystemTest.java:289)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+    <system-out><![CDATA[2025-05-30T21:51:46.853+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/projects/active
+2025-05-30T21:51:46.860+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/projects/active
+2025-05-30T21:51:46.889+02:00  WARN 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 90022, SQLState: 90022
+2025-05-30T21:51:46.890+02:00 ERROR 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Funktion "TO_TIMESTAMP" nicht gefunden
+Function "TO_TIMESTAMP" not found; SQL statement:
+SELECT COALESCE(SUM(EXTRACT(HOUR FROM TO_TIMESTAMP(t.actual_hours, 'HH24:MI')) * 60 + EXTRACT(MINUTE FROM TO_TIMESTAMP(t.actual_hours, 'HH24:MI'))), 0) FROM time_entries t WHERE t.project_id = ? [90022-232]
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateProjectStatus" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.064">
+    <system-out><![CDATA[2025-05-30T21:51:46.923+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/projects/4/deactivate
+2025-05-30T21:51:46.937+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/projects/4/deactivate
+2025-05-30T21:51:46.941+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.deactivateProject(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+2025-05-30T21:51:46.941+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.deactivateProject(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+Projekt deaktiviert
+2025-05-30T21:51:46.958+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Securing PATCH /api/projects/4/activate
+2025-05-30T21:51:46.969+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Secured PATCH /api/projects/4/activate
+2025-05-30T21:51:46.971+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.activateProject(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+2025-05-30T21:51:46.972+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.ProjectController.activateProject(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.ProjectController]
+Projekt wieder aktiviert
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateTimeEntry" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.105">
+    <system-out><![CDATA[2025-05-30T21:51:47.000+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/time-entries
+2025-05-30T21:51:47.011+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/time-entries
+Zeiteintrag erstellt mit ID: 1
+]]></system-out>
+  </testcase>
+  <testcase name="testGetTimeEntries" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.084">
+    <system-out><![CDATA[2025-05-30T21:51:47.092+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/time-entries
+2025-05-30T21:51:47.108+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/time-entries
+Zeiteinträge abgerufen: 1
+]]></system-out>
+  </testcase>
+  <testcase name="testTimeTracking" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="2.095">
+    <system-out><![CDATA[2025-05-30T21:51:47.176+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /api/time-entries/start
+2025-05-30T21:51:47.185+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Secured POST /api/time-entries/start
+Zeiterfassung gestartet mit Entry ID: 2
+2025-05-30T21:51:49.226+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/time-entries/2/stop
+2025-05-30T21:51:49.243+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/time-entries/2/stop
+Zeiterfassung gestoppt
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateTimeEntry" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.041">
+    <system-out><![CDATA[2025-05-30T21:51:49.276+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Securing PUT /api/time-entries/1
+2025-05-30T21:51:49.289+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Secured PUT /api/time-entries/1
+Zeiteintrag aktualisiert
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateAbsenceRequest" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.054">
+    <system-out><![CDATA[2025-05-30T21:51:49.321+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/absences
+2025-05-30T21:51:49.331+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/absences
+Abwesenheitsantrag erstellt mit ID: 5
+]]></system-out>
+  </testcase>
+  <testcase name="testGetUserAbsences" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.021">
+    <system-out><![CDATA[2025-05-30T21:51:49.373+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/absences
+2025-05-30T21:51:49.380+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/absences
+Abwesenheiten abgerufen: 2
+]]></system-out>
+  </testcase>
+  <testcase name="testGetPendingAbsences" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.033">
+    <system-out><![CDATA[2025-05-30T21:51:49.396+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/absences/pending
+2025-05-30T21:51:49.404+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/absences/pending
+2025-05-30T21:51:49.404+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.getPendingAbsences(); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+2025-05-30T21:51:49.407+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.getPendingAbsences(); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+Ausstehende Abwesenheiten abgerufen (Manager)
+]]></system-out>
+  </testcase>
+  <testcase name="testApproveAbsence" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.032">
+    <system-out><![CDATA[2025-05-30T21:51:49.435+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/absences/5/approve
+2025-05-30T21:51:49.442+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/absences/5/approve
+2025-05-30T21:51:49.443+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.approveAbsence(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+2025-05-30T21:51:49.443+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.approveAbsence(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+Abwesenheit genehmigt (Manager)
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateAbsence" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.035">
+    <system-out><![CDATA[2025-05-30T21:51:49.464+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Securing PUT /api/absences/5
+2025-05-30T21:51:49.471+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Secured PUT /api/absences/5
+2025-05-30T21:51:49.474+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.updateAbsence(java.lang.Long,ch.fhnw.timerecordingbackend.dto.absence.AbsenceRequest); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+2025-05-30T21:51:49.486+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AbsenceController.updateAbsence(java.lang.Long,ch.fhnw.timerecordingbackend.dto.absence.AbsenceRequest); target is of class [ch.fhnw.timerecordingbackend.controller.AbsenceController]
+Update genehmigter Abwesenheit korrekt verhindert
+]]></system-out>
+  </testcase>
+  <testcase name="testChangePassword" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.176">
+    <system-out><![CDATA[2025-05-30T21:51:49.509+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Securing PUT /api/users/change-password
+2025-05-30T21:51:49.523+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-4] o.s.security.web.FilterChainProxy        : Secured PUT /api/users/change-password
+Passwort erfolgreich geändert
+]]></system-out>
+  </testcase>
+  <testcase name="testResetPassword" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.102">
+    <system-out><![CDATA[2025-05-30T21:51:49.679+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/admin/users/7/reset-password
+2025-05-30T21:51:49.685+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/admin/users/7/reset-password
+2025-05-30T21:51:49.686+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.resetUserPassword(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:49.687+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-5] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.resetUserPassword(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+DEBUG UserServiceImpl: ----- Start Log-Suche für Passwort-Reset-Anfrage (Workaround) -----
+DEBUG UserServiceImpl: Suche für userId = 7
+DEBUG UserServiceImpl: Suche nach action = "Passwort Reset angefordert" und Status IS NULL oder PENDING
+DEBUG UserServiceImpl: Kein Log mit Status NULL gefunden für Action "Passwort Reset angefordert". Suche nach Status PENDING.
+DEBUG UserServiceImpl: FEHLER (Workaround): Kein passender SystemLog (Status NULL oder PENDING) mit Action 'Passwort Reset angefordert' für User ID 7 gefunden.
+DEBUG UserServiceImpl (Workaround): Auch KEINE Logs für userId 7 und Action 'Passwort Reset angefordert' (unabhängig vom Status) gefunden.
+DEBUG UserServiceImpl: ----- Ende Log-Suche (Workaround) -----
+Passwort zurückgesetzt (Admin
+]]></system-out>
+  </testcase>
+  <testcase name="testCreateBackup" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.066">
+    <system-out><![CDATA[2025-05-30T21:51:49.783+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /api/admin/backups/create
+2025-05-30T21:51:49.790+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] o.s.security.web.FilterChainProxy        : Secured POST /api/admin/backups/create
+2025-05-30T21:51:49.791+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.BackupController.triggerBackup(); target is of class [ch.fhnw.timerecordingbackend.controller.BackupController]
+2025-05-30T21:51:49.793+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.BackupController.triggerBackup(); target is of class [ch.fhnw.timerecordingbackend.controller.BackupController]
+2025-05-30T21:51:49.793+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : Backup-Prozess gestartet...
+2025-05-30T21:51:49.804+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : 7 Benutzer gefunden.
+2025-05-30T21:51:49.807+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : 4 Projekte gefunden.
+2025-05-30T21:51:49.810+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : 2 Zeiteinträge gefunden.
+2025-05-30T21:51:49.814+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : 5 Abwesenheiten gefunden.
+2025-05-30T21:51:49.836+02:00  INFO 17599 --- [time-recording-backend-test] [o-auto-1-exec-6] c.f.t.service.BackupServiceImpl          : Backup erfolgreich erstellt: /Users/Furkan/IdeaProjects/time-recording-backend/./backups/timerecording_backup_20250530_215149.json
+Backup erstellt: /Users/Furkan/IdeaProjects/time-recording-backend/./backups/timerecording_backup_20250530_215149.json
+]]></system-out>
+  </testcase>
+  <testcase name="testListBackups" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.024">
+    <system-out><![CDATA[2025-05-30T21:51:49.852+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/backups
+2025-05-30T21:51:49.864+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/backups
+2025-05-30T21:51:49.864+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.BackupController.listBackups(); target is of class [ch.fhnw.timerecordingbackend.controller.BackupController]
+2025-05-30T21:51:49.866+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-7] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.BackupController.listBackups(); target is of class [ch.fhnw.timerecordingbackend.controller.BackupController]
+✅ Backup-Liste abgerufen: 12 Dateien
+]]></system-out>
+  </testcase>
+  <testcase name="testGetSystemLogs" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.033">
+    <system-out><![CDATA[2025-05-30T21:51:49.878+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/logs
+2025-05-30T21:51:49.886+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/logs
+2025-05-30T21:51:49.888+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getSystemLogs(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+2025-05-30T21:51:49.888+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-8] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.AdminController.getSystemLogs(); target is of class [ch.fhnw.timerecordingbackend.controller.AdminController]
+System-Logs abgerufen: 13 Einträge
+]]></system-out>
+  </testcase>
+  <testcase name="testUnauthorizedAccess" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.018">
+    <failure message="expected: &lt;401 UNAUTHORIZED&gt; but was: &lt;403 FORBIDDEN&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <401 UNAUTHORIZED> but was: <403 FORBIDDEN>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest.testUnauthorizedAccess(TimeRecordingSystemTest.java:659)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+    <system-out><![CDATA[2025-05-30T21:51:49.913+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2025-05-30T21:51:49.913+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:49.916+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-05-30T21:51:49.921+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /error
+2025-05-30T21:51:49.922+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:49.922+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+]]></system-out>
+  </testcase>
+  <testcase name="testForbiddenAccess" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.019">
+    <system-out><![CDATA[2025-05-30T21:51:49.931+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2025-05-30T21:51:49.940+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.s.w.access.AccessDeniedHandlerImpl   : Responding with 403 status code
+2025-05-30T21:51:49.941+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /error
+2025-05-30T21:51:49.941+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:49.941+02:00 DEBUG 17599 --- [time-recording-backend-test] [-auto-1-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+Forbidden Access korrekt abgelehnt
+]]></system-out>
+  </testcase>
+  <testcase name="testDeleteTimeEntry" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.052">
+    <system-out><![CDATA[2025-05-30T21:51:49.951+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Securing DELETE /api/time-entries/1
+2025-05-30T21:51:49.957+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] o.s.security.web.FilterChainProxy        : Secured DELETE /api/time-entries/1
+2025-05-30T21:51:49.962+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.TimeEntryController.deleteTimeEntry(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.TimeEntryController]
+2025-05-30T21:51:49.968+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-1] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity ch.fhnw.timerecordingbackend.controller.TimeEntryController.deleteTimeEntry(java.lang.Long); target is of class [ch.fhnw.timerecordingbackend.controller.TimeEntryController]
+Zeiteintrag gelöscht
+]]></system-out>
+  </testcase>
+  <testcase name="testLogout" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.115">
+    <system-out><![CDATA[2025-05-30T21:51:50.025+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/logout
+2025-05-30T21:51:50.055+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/logout
+Logout erfolgreich
+2025-05-30T21:51:50.099+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/time-entries
+2025-05-30T21:51:50.100+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:50.101+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2025-05-30T21:51:50.104+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /error
+2025-05-30T21:51:50.105+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-30T21:51:50.105+02:00 DEBUG 17599 --- [time-recording-backend-test] [o-auto-1-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+Logout-Verhalten getestet
+]]></system-out>
+  </testcase>
+  <testcase name="testSummary" classname="ch.fhnw.timerecordingbackend.systemtest.TimeRecordingSystemTest" time="0.007">
+    <system-out><![CDATA[
+============================================================
+🎉 SYSTEMTEST ERFOLGREICH ABGESCHLOSSEN 🎉
+============================================================
+Alle 30 Systemtests erfolgreich durchlaufen
+Authentication & Authorization getestet
+User Management getestet
+Project Management getestet
+Time Entry Management getestet
+Absence Management getestet
+Password Management getestet
+Backup Funktionalität getestet
+System Logs getestet
+Security & Error Handling getestet
+============================================================
+]]></system-out>
+  </testcase>
+</testsuite>

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  * Entität Klasse für System Logs
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Entity
 @Table(name = "system_logs")
@@ -41,8 +40,7 @@ public class SystemLog {
     @Column(name = "target_id")
     private Long targetId;
 
-    // NEUES FELD für den Status der Anfrage
-    @Column(name = "processed_status", length = 20) // z.B. "PENDING", "COMPLETED"
+    @Column(name = "processed_status", length = 20)
     private String processedStatus;
 
     /**
@@ -50,8 +48,7 @@ public class SystemLog {
      */
     public SystemLog() {}
 
-    // Getter und Setter für alle Felder, inklusive processedStatus
-
+    // Getter und Setter
     public Long getId() {
         return id;
     }

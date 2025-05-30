@@ -4,7 +4,6 @@ package ch.fhnw.timerecordingbackend.model.enums;
  * Abwesenheitsarten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.1 - Quellenbezeichnung angepasst
  */
 public enum AbsenceType {
     VACATION("Urlaub"),

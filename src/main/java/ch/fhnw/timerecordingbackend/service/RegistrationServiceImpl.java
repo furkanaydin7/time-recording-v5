@@ -44,9 +44,14 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Registrierungs Anfrage abschicken
+     * @param requestDto
+     * @return
+     */
     @Override
     @Transactional
-    public Registration submitRegistrationRequest(RegistrationRequest requestDto) { // DTO bleibt, Rückgabe ist Entität
+    public Registration submitRegistrationRequest(RegistrationRequest requestDto) {
         if (registrationRequestRepository.existsByEmail(requestDto.getEmail())) {
             throw new ValidationException("Eine Registrierungsanfrage mit dieser E-Mail existiert bereits.");
         }
@@ -96,24 +101,29 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Registration> getAllPendingRequests() { // ENTITÄTSNAME GEÄNDERT
+    public List<Registration> getAllPendingRequests() {
         return registrationRequestRepository.findByStatus("PENDING");
     }
 
     @Override
-    public List<Registration> getAllRequests() { // ENTITÄTSNAME GEÄNDERT
+    public List<Registration> getAllRequests() {
         return registrationRequestRepository.findAll();
     }
 
     @Override
-    public Optional<Registration> getRequestById(Long id) { // ENTITÄTSNAME GEÄNDERT
+    public Optional<Registration> getRequestById(Long id) {
         return registrationRequestRepository.findById(id);
     }
 
+    /**
+     * Registrierungsanfrage annehmen
+     * @param requestId
+     * @param adminEmail
+     */
     @Override
     @Transactional
     public void approveRegistrationRequest(Long requestId, String adminEmail) {
-        Registration request = registrationRequestRepository.findById(requestId) // ENTITÄTSNAME GEÄNDERT
+        Registration request = registrationRequestRepository.findById(requestId)
                 .orElseThrow(() -> new ValidationException("Registrierungsanfrage nicht gefunden."));
 
         if (!request.getStatus().equals("PENDING")) {
@@ -121,7 +131,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         List<String> allowedAssignedRoles = Arrays.asList("EMPLOYEE", "MANAGER");
-        String roleToAssign = request.getRequestedRole().toUpperCase(); // Die angeforderte Rolle
+        String roleToAssign = request.getRequestedRole().toUpperCase();
         if (!allowedAssignedRoles.contains(roleToAssign)) {
             throw new ValidationException("Angeforderte Rolle '" + roleToAssign + "' ist für die automatische Zuweisung über die Registrierung nicht erlaubt. Manuelle Zuweisung durch Admin erforderlich.");
         }
@@ -134,7 +144,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         newUser.setPlannedHoursPerDay(8.0);
         newUser.setManager(request.getManager());
 
-        User createdUser = userService.createUser(newUser, roleToAssign);
+        Long managerId = (request.getManager() != null) ? request.getManager().getId() : null;
+        User createdUser = userService.createUser(newUser, roleToAssign, managerId);
 
         request.setStatus("APPROVED");
         registrationRequestRepository.save(request);
@@ -145,10 +156,15 @@ public class RegistrationServiceImpl implements RegistrationService {
                 adminUser != null ? adminUser.getId() : null, adminEmail, null, "RegistrationRequest", requestId);
     }
 
+    /**
+     * Regestrierungsanfrage ablehnen
+     * @param requestId
+     * @param adminEmail
+     */
     @Override
     @Transactional
     public void rejectRegistrationRequest(Long requestId, String adminEmail) {
-        Registration request = registrationRequestRepository.findById(requestId) // ENTITÄTSNAME GEÄNDERT
+        Registration request = registrationRequestRepository.findById(requestId)
                 .orElseThrow(() -> new ValidationException("Registrierungsanfrage nicht gefunden."));
 
         if (!request.getStatus().equals("PENDING")) {

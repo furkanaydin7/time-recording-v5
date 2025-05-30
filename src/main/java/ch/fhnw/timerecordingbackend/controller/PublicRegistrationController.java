@@ -33,6 +33,11 @@ public class PublicRegistrationController {
         this.userService = userService;
     }
 
+    /**
+     * Erstellt eine neue Registrierungsanfrage
+     * @param request
+     * @return
+     */
     @PostMapping("/registration-requests")
     public ResponseEntity<Map<String, String>> submitRegistrationRequest(@Valid @RequestBody RegistrationRequest request) {
         try {
@@ -67,6 +72,10 @@ public class PublicRegistrationController {
 
     }
 
+    /**
+     * Gibt eine Liste aller verfügbaren Manager zurück
+     * @return
+     */
     @GetMapping("/managers")
     public ResponseEntity<List<Map<String, Object>>> getPublicManagers() {
         List<User> users = userService.findAllUsers();

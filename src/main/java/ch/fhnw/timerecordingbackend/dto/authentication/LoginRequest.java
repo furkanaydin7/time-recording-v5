@@ -3,9 +3,11 @@ package ch.fhnw.timerecordingbackend.dto.authentication;
 import jakarta.validation.constraints.*;
 
 /**
- * Datenmodell für Login-Anfragen mit E-Mail und Passwort
+ * Anfrage-DTO für Benutzer-Login mit E-Mail und Passwort.
+ * Verwendet in /api/auth/login.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 public class LoginRequest {
     // Feld darf nicht leer sein und muss ein gültiges E-Mail-Format haben

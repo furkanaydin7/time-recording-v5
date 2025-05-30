@@ -12,7 +12,6 @@ import java.util.Optional;
  * UserService Interface
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 public interface UserService {
 
@@ -143,6 +142,6 @@ public interface UserService {
      * @return Liste mit allen Rollen
      */
     List<Role> getAllRoles();
-    boolean requestPasswordReset(String email); // <-- Stelle sicher, dass diese Zeile genau so existiert
+    boolean requestPasswordReset(String email);
 
 }

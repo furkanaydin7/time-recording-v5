@@ -15,6 +15,7 @@ import java.io.IOException;
  * Führt täglich um 02:00 Uhr automatisch ein Backup über den BackupService aus.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 @Configuration
 @EnableScheduling
@@ -30,6 +31,7 @@ public class SchedulerConfig {
     public void performDailyBackup() {
         logger.info("Starte geplanten täglichen Backup-Prozess...");
         try {
+            // Führt die Backup-Erstellung aus und loggt den Speicherort
             String backupPath = backupService.createBackup();
             logger.info("Geplanter täglicher Backup erfolgreich abgeschlossen. Gespeichert unter: {}", backupPath);
         } catch (IOException e) {

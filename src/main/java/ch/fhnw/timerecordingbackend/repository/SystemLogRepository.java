@@ -13,7 +13,6 @@ import java.util.List;
  * Repository für System Log Entitäten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 public interface SystemLogRepository extends JpaRepository<SystemLog, Long> {
 
@@ -87,6 +86,12 @@ public interface SystemLogRepository extends JpaRepository<SystemLog, Long> {
      */
     long deleteByTimestampBefore(LocalDateTime timestamp);
 
+    /**
+     * @author EK
+     * @param userId
+     * @param action
+     * @return
+     */
     List<SystemLog> findByUserIdAndActionAndProcessedStatusIsNullOrderByTimestampDesc(Long userId, String action);
 
     List<SystemLog> findByUserIdAndActionOrderByTimestampDesc(Long userId, String action);

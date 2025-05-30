@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * REST-Controller für Abwesenheit-Verwaltung
+ * @author PD
+ */
 @RestController
 @RequestMapping("/api/absences")
 public class AbsenceController {
@@ -99,6 +103,7 @@ public class AbsenceController {
     /**
      * Abwesenheit löschen (nur Admin oder Besitzer unter Bedingungen)
      * DELETE /api/absences/{id}
+     * @author FA
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN') or @absenceController.isAbsenceOwner(#id)")
@@ -107,7 +112,7 @@ public class AbsenceController {
         Absence absenceToDelete = absenceService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Abwesenheit nicht gefunden mit ID: " + id));
 
-        // Wenn der Benutzer kein Admin ist, prüfen, ob die Abwesenheit stornierbar ist
+        // Wenn der Benutzer kein Admin ist, prüfen, ob die Abwesenheit storniert werden kann
         if (!currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN"))) {
             if (absenceToDelete.getStatus() == AbsenceStatus.APPROVED || absenceToDelete.getStatus() == AbsenceStatus.REJECTED) {
                 throw new IllegalArgumentException("Genehmigte oder abgelehnte Abwesenheiten können nicht vom Mitarbeiter storniert werden.");

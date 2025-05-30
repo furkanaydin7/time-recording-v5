@@ -23,6 +23,7 @@ import java.util.List;
  * erstellt.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

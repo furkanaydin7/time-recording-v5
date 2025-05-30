@@ -18,18 +18,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Globale Ausnahmebehandlung für REST-Controller.
+ * Fängt Validierungs-, Status- und andere Ausnahmen und formatiert einheitliche JSON-Antworten.
+ * Beinhaltet Handler für MethodArgumentNotValidException, ValidationException,
+ * IllegalArgumentException, ResponseStatusException, AccessDeniedException und alle anderen Exceptions.
+ * @author FA
+ * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Behandelt Validierungsfehler bei @Valid-annotierten Requests.
+     * Überschreibt die Methode aus ResponseEntityExceptionHandler.
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        // Fehlerdetails aus BindingResult extrahieren
         Map<String, Object> body = new HashMap<>();
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.toList());
+        // Standardfelder für die Fehlerantwort
         body.put("timestamp", System.currentTimeMillis());
         body.put("status", status.value());
         body.put("errors", errors);
@@ -37,17 +52,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, headers, status);
     }
 
+    /**
+     * Behandelt Validierungs-Ausnahmen aus dem Service-Layer.
+     * Antwort mit HTTP 400 Bad Request.
+     */
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<Object> handleValidationException(ValidationException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", System.currentTimeMillis());
         body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Bad Request");
-        body.put("message", ex.getMessage()); // Message from the service layer
-        body.put("path", request.getDescription(false).substring(4)); // Extract URI
+        body.put("message", ex.getMessage()); // Meldung aus der Exception
+        // Pfad der Anfrage extrahieren (ohne 'uri=' Präfix)
+        body.put("path", request.getDescription(false).substring(4));
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Behandelt IllegalArgumentException und gibt Bad Request zurück.
+     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
@@ -59,17 +82,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Behandelt ResponseStatusException für eigene Service- und Controller-Fehler.
+     * Nutzt den in der Exception definierten HTTP-Status.
+     */
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Object> handleResponseStatusException(ResponseStatusException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", System.currentTimeMillis());
         body.put("status", ex.getStatusCode().value());
+        // Ermittelt den Reason-Phrase des HTTP-Status
         body.put("error", HttpStatus.resolve(ex.getStatusCode().value()).getReasonPhrase());
-        body.put("message", ex.getReason()); // Use getReason() for the message
+        body.put("message", ex.getReason());
         body.put("path", request.getDescription(false).substring(4));
         return new ResponseEntity<>(body, ex.getStatusCode());
     }
 
+    /**
+     * Behandelt AccessDeniedException für fehlende Berechtigungen (HTTP 403).
+     */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
@@ -81,7 +112,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
     }
 
-    // Fallback for other exceptions
+    /**
+     * Fallback-Handler für alle anderen ungeprüften Exceptions.
+     * Gibt HTTP 500 Internal Server Error zurück.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllOtherExceptions(Exception ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
@@ -90,8 +124,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         body.put("error", "Internal Server Error");
         body.put("message", "An unexpected error occurred: " + ex.getMessage());
         body.put("path", request.getDescription(false).substring(4));
-        // Log the exception for server-side analysis
-        // logger.error("Unexpected error occurred", ex);
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

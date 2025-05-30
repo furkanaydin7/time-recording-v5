@@ -7,6 +7,7 @@ import ch.fhnw.timerecordingbackend.model.enums.UserStatus;
 import ch.fhnw.timerecordingbackend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +19,11 @@ import java.util.Set;
  * DataInitializer für Initialdaten beim Start der Anwendung
  * Erstellt Standard-Rollen, Admin-Benutzer und Beispieldaten
  * @author PD
- * @version 1.1
+ * Quelle: ChatGPT.com
  */
+
 @Component
+//@Profile("!test") // Für System test hinzufügen
 public class DataInitializer implements CommandLineRunner {
 
     @Autowired

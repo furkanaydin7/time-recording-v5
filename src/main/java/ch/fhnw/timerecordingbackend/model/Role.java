@@ -11,7 +11,6 @@ import java.util.Set;
  * Definiert Zugriffsrollen
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Entity
 @Table(name = "roles")
@@ -72,7 +71,7 @@ public class Role {
     }
 
     /**
-     * String-Repräsentation der Rolle
+     * String Repräsentation der Rolle
      * @return String-Repräsentation der Rolle
      */
     @Override

@@ -1,0 +1,11 @@
+ch/fhnw/timerecordingbackend/service/UserServiceIntegrationTest.class
+ch/fhnw/timerecordingbackend/controller/TimeEntryControllerTest.class
+ch/fhnw/timerecordingbackend/controller/BackupControllerTest.class
+ch/fhnw/timerecordingbackend/service/AbsenceServiceIntegrationTest.class
+ch/fhnw/timerecordingbackend/TimeRecordingBackendApplicationTests.class
+ch/fhnw/timerecordingbackend/controller/PublicRegistrationControllerTest.class
+ch/fhnw/timerecordingbackend/systemtest/SystemTestConfiguration.class
+ch/fhnw/timerecordingbackend/systemtest/TimeRecordingSystemTest.class
+ch/fhnw/timerecordingbackend/controller/UserControllerTest.class
+ch/fhnw/timerecordingbackend/service/TimeEntryServiceIntegrationTest.class
+ch/fhnw/timerecordingbackend/controller/AdminControllerTest.class

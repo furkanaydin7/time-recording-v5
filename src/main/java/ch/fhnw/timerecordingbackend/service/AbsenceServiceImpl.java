@@ -23,7 +23,6 @@ import java.util.Optional;
  * Implementierung AbsenceService Interface
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Service
 public class AbsenceServiceImpl implements AbsenceService{
@@ -170,6 +169,7 @@ public class AbsenceServiceImpl implements AbsenceService{
      * @param id
      * @param approverId
      * @return
+     * @author PD/FA
      */
     @Override
     @Transactional
@@ -185,10 +185,10 @@ public class AbsenceServiceImpl implements AbsenceService{
         User applicant = absence.getUser();
 
         boolean isAdmin = approver.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN"));
-        // Prüft, ob der Antragsteller einen Manager hat UND ob dieser Manager der aktuelle Genehmiger ist.
+        // Prüft, ob der Antragsteller einen Manager hat UND ob dieser Manager der aktuelle Genehmiger ist
         boolean isDirectManager = applicant.getManager() != null && applicant.getManager().getId().equals(approverId);
 
-        // Nur Admins oder der direkte Vorgesetzte (der auch die Rolle MANAGER haben sollte) dürfen genehmigen.
+        // Nur Admins oder der direkte Vorgesetzte dürfen genehmigen
         if (!isAdmin && !isDirectManager) {
             throw new AccessDeniedException("Nur der direkte Vorgesetzte oder ein Administrator darf diese Abwesenheit genehmigen.");
         }
@@ -206,6 +206,13 @@ public class AbsenceServiceImpl implements AbsenceService{
         return approvedAbsence;
     }
 
+    /**
+     * Abwesenheit ablehnen
+     * @param id
+     * @param rejecterId
+     * @return
+     * @author PD/FA
+     */
     @Override
     @Transactional
     public Absence rejectAbsence(Long id, Long rejecterId) {
@@ -237,11 +244,21 @@ public class AbsenceServiceImpl implements AbsenceService{
         return rejectedAbsence;
     }
 
+    /**
+     * Genehmigte Absenz finden
+     * @author FA
+     * @return
+     */
     @Override
     public List<Absence> findApprovedAbsences() {
         return absenceRepository.findByStatus(AbsenceStatus.APPROVED);
     }
 
+    /**
+     * Pending Absenz finden
+     * @author FA
+     * @return
+     */
     @Override
     public List<Absence> findPendingAbsences(User currentUser) {
         if (currentUser == null) {
@@ -259,6 +276,13 @@ public class AbsenceServiceImpl implements AbsenceService{
         }
         return Collections.emptyList();
     }
+
+    /**
+     * Genehmigte Absenz abrufen
+     * @author FA
+     * @param currentUser Der aktuell angemeldete Benutzer.
+     * @return
+     */
     @Override
     public List<Absence> getApprovedAbsencesForUserView(User currentUser) {
         if (currentUser == null) {
@@ -276,8 +300,6 @@ public class AbsenceServiceImpl implements AbsenceService{
             }
             return absenceRepository.findByUserInAndStatus(directReports, AbsenceStatus.APPROVED);
         }
-        // Für andere Rollen (z.B. EMPLOYEE direkt) geben wir eine leere Liste zurück,
-        // da dieser Endpunkt für sie nicht gedacht ist (sollte durch @PreAuthorize abgefangen werden).
         return Collections.emptyList();
     }
 

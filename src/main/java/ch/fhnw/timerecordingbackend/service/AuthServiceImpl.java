@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
  * Behandelt Login, Logout und Token-Verwaltung
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  * Quelle: ChatGPT
  */
 @Service

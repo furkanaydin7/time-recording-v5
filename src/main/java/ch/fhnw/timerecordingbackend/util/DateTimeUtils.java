@@ -12,7 +12,7 @@ import java.util.List;
  * Utils Klasse für Datum und Zeit Operationen
  * Hilfsmethoden für häufig verwendete Datum/Zeit Berechnungen
  * @author PD
- * @version 1.0
+ * Quelle: ChatGPT.com
  */
 public class DateTimeUtils {
 
@@ -29,8 +29,6 @@ public class DateTimeUtils {
     private DateTimeUtils() {
         throw new IllegalStateException("Utility-Klasse kann nicht instanziiert werden");
     }
-
-    // ==================== FORMATIERUNG ====================
 
     /**
      * Formatiert LocalDate zu String im Format "yyyy-MM-dd"
@@ -76,8 +74,6 @@ public class DateTimeUtils {
     public static String formatDateTimeDisplay(LocalDateTime dateTime) {
         return dateTime != null ? dateTime.format(DISPLAY_DATETIME_FORMAT) : null;
     }
-
-    // ==================== PARSING ====================
 
     /**
      * Parst String zu LocalDate
@@ -126,8 +122,6 @@ public class DateTimeUtils {
             return null;
         }
     }
-
-    // ==================== STUNDEN-BERECHNUNGEN ====================
 
     /**
      * Konvertiert Stunden (Double) zu "HH:mm" Format
@@ -218,8 +212,6 @@ public class DateTimeUtils {
         return formatHours(hours1 - hours2);
     }
 
-    // ==================== DATUM-BERECHNUNGEN ====================
-
     /**
      * Prüft ob ein Datum ein Werktag ist (Montag bis Freitag)
      * @param date Das zu prüfende Datum
@@ -301,8 +293,6 @@ public class DateTimeUtils {
         return date != null ? date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)) : null;
     }
 
-    // ==================== VALIDIERUNG ====================
-
     /**
      * Prüft ob ein Datum in der Vergangenheit liegt
      * @param date Das zu prüfende Datum
@@ -359,8 +349,6 @@ public class DateTimeUtils {
         return ChronoUnit.DAYS.between(startDate, endDate);
     }
 
-    // ==================== ZEITZONE-UNTERSTÜTZUNG ====================
-
     /**
      * Konvertiert LocalDateTime zu Instant mit System-Zeitzone
      * @param dateTime LocalDateTime
@@ -378,8 +366,6 @@ public class DateTimeUtils {
     public static LocalDateTime fromInstant(Instant instant) {
         return instant != null ? LocalDateTime.ofInstant(instant, ZoneId.systemDefault()) : null;
     }
-
-    // ==================== HILFSMETHODEN FÜR REPORTS ====================
 
     /**
      * Erstellt YearMonth aus Jahr und Monat

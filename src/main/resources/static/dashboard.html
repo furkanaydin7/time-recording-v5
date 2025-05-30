@@ -1,4 +1,8 @@
 <!--@author EK-->
+<!--Quellen: https://developer.mozilla.org/de/docs/Web/HTML,
+https://www.w3schools.com/html/, ChatGPT-->
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -60,7 +64,7 @@
       <div class="action-buttons">
         <button class="btn btn-success" id="viewUsersBtn">Benutzer verwalten</button><button class="btn btn-primary" id="openCreateUserModalBtn">Neuen Benutzer anlegen</button>
         <button class="btn btn-warning" id="viewRegistrationRequestsBtn">Registrierungsanfragen</button> <button class="btn btn-secondary" id="viewSystemLogsBtn">System-Logs</button>
-        <button class="btn btn-secondary" id="viewSystemLogsBtn">System-Logs</button><button class="btn btn-warning" id="debugTokenBtn">Debug Token</button>
+        <button class="btn btn-warning" id="debugTokenBtn">Debug Token</button>
         <button class="btn btn-info" id="checkSystemStatusBtn">System Check</button>
       </div>
     </div>
@@ -155,10 +159,6 @@
     <h2>Projekt Details: <span id="detailProjectName"></span></h2>
     <div id="projectDetailContent">
       <div class="form-group">
-        <label>Name:</label>
-        <span id="detailProjectName"></span>
-      </div>
-      <div class="form-group">
         <label>Beschreibung:</label>
         <span id="detailProjectDescription"></span>
       </div>
@@ -230,10 +230,6 @@
     <h2>Benutzerdetails: <span id="detailUserName"></span></h2>
     <div id="userDetailContent">
       <div class="form-group">
-        <label>Name:</label>
-        <span id="detailUserName"></span>
-      </div>
-      <div class="form-group">
         <label>E-Mail:</label>
         <span id="detailUserEmail"></span>
       </div>
@@ -244,6 +240,10 @@
       <div class="form-group">
         <label>Geplante Stunden/Tag:</label>
         <span id="detailUserPlannedHours"></span>
+      </div>
+      <div class="form-group">
+        <label>Übergeordneter Manager:</label>
+        <span id="detailUserDirectManager">N/A</span>
       </div>
       <div class="form-group">
         <label>Erstellt am:</label>

@@ -3,10 +3,11 @@ package ch.fhnw.timerecordingbackend.dto.authentication;
 import java.util.List;
 
 /**
- * Antwortobjekt für den Login-Vorgang mit Token und Benutzerinfos.
- * Enthält eine innere UserDto-Klasse mit ID, Name und Rolle.
+ * Antwort-DTO für den Login-Vorgang, enthält JWT-Token und Benutzerinformationen.
+ * Beinhaltet eine innere UserDto-Klasse mit ID, Name und Rollen.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  * @version 1.1 - Rollenerkennung hinzugefügt PD
  */
 public class LoginResponse {
@@ -16,6 +17,7 @@ public class LoginResponse {
     // Benutzerinformationen
     private UserDto user;
 
+    // Standard-Konstruktur
     public LoginResponse() {}
 
     public LoginResponse(String token, UserDto user) {
@@ -50,8 +52,16 @@ public class LoginResponse {
         private String role;
         private List<String> roles;
 
+         // Standard-Konstruktur
         public UserDto() {}
 
+        /**
+         * Konstruktor mit Rollenliste und primärer Rollenerkennung.
+         * @param id Benutzer-ID
+         * @param name Benutzername
+         * @param role Primärrolle
+         * @param roles Liste aller Rollen
+         */
         public UserDto(Long id, String name, String role, List<String> roles) {
             this.id = id;
             this.name = name;

@@ -6,10 +6,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Antwortobjekt für Zeiteinträge mit Arbeitszeiten, Pausen, Projekt- und Benutzerdaten.
- * Optionale Felder werden nur bei Bedarf serialisiert (@JsonInclude)
+ * Antwort-DTO für Zeiteinträge mit Arbeitszeiten, Pausen, Projekt- und Benutzerdaten.
+ * Optionale Felder werden nur bei Bedarf serialisiert (@JsonInclude.NON_NULL).
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TimeEntryResponse {
@@ -22,6 +23,8 @@ public class TimeEntryResponse {
     private String actualHours;
     private String plannedHours;
     private String difference;
+
+    // Zugeordnetes Projekt (optional)
     private ProjectDto project;
     private Long userId;
     private String user;

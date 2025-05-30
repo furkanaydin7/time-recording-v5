@@ -11,7 +11,6 @@ import java.util.Set;
  * Benutzerinformationen an Client senden
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.1 - Passwort reset und temporäre Passwort hinzugefügt
  * Quelle: https://techkluster.com/2023/08/21/dto-for-a-java-spring-application/
  */
 public class UserResponse {

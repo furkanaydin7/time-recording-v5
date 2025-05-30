@@ -12,7 +12,6 @@ import java.time.temporal.ChronoUnit;
  * Entität Klasse für Abwesenheiten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Entity
 @Table(name = "absences")
@@ -35,10 +34,9 @@ public class Absence {
     @Column(nullable = false)
     private AbsenceType type;
 
-    // Ersetze 'approved' und 'approver' durch 'status' und 'rejectionReason'
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AbsenceStatus status = AbsenceStatus.PENDING; // Standardwert ist PENDING
+    private AbsenceStatus status = AbsenceStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approver_id")

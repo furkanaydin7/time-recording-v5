@@ -27,7 +27,6 @@ import java.util.Random; // Import für Random
  * Geschöftslogik Benutzerverwaltung
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.1 - Passwort zurücksetzten, zufälliges Passwort generieren und PasswordEncoder hinzugefügt
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,6 +44,7 @@ public class UserServiceImpl implements UserService {
      * @param userRepository
      * @param roleRepository
      * @param systemLogRepository
+     * @param passwordEncoder
      */
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, SystemLogRepository systemLogRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -52,7 +52,14 @@ public class UserServiceImpl implements UserService {
         this.systemLogRepository = systemLogRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    @Override // <-- Stelle sicher, dass @Override hier steht und keinen Fehler wirft
+
+    /**
+     * Passwort reset request stellen
+     * @author EK
+     * @param email
+     * @return
+     */
+    @Override
     @Transactional
     public boolean requestPasswordReset(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
@@ -105,7 +112,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public User createUser(User user, String roleName, Long managerId) { // managerId hinzugefügt
+    public User createUser(User user, String roleName, Long managerId) {
         // Prüfen ob Email bereits existiert
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new ValidationException("Email existiert bereits");
@@ -125,7 +132,7 @@ public class UserServiceImpl implements UserService {
         if (managerId != null) {
             User manager = userRepository.findById(managerId)
                     .orElseThrow(() -> new ValidationException("Manager mit ID " + managerId + " nicht gefunden."));
-            // Sicherstellen, dass der zugewiesene Benutzer auch Manager-Rechte hat (optional, aber gute Praxis)
+            // Sicherstellen, dass der zugewiesene Benutzer Manager ist
             if (!manager.getRoles().stream().anyMatch(r -> r.getName().equals("MANAGER") || r.getName().equals("ADMIN"))) {
                 throw new ValidationException("Der ausgewählte Benutzer mit ID " + managerId + " hat keine Manager- oder Admin-Rolle.");
             }
@@ -135,8 +142,6 @@ public class UserServiceImpl implements UserService {
             logger.info("Benutzer {} wird ohne direkten Manager erstellt.", user.getEmail());
         }
 
-
-        // Speichern
         User savedUser = userRepository.save(user);
 
         // System Log erstellen
@@ -224,7 +229,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void changePassword(ChangePasswordRequest request) {
-        // Aktuelle Benutzer-ID aus Security Context holen
+        // Aktuelle Benutzer-ID
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated()) {
             throw new ValidationException("Benutzer ist nicht authentifiziert");
@@ -236,12 +241,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ValidationException("Benutzer nicht gefunden"));
 
-        // Altes Passwort korrekt überprüfen
+        // Altes Passwort überprüfen
         if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
             throw new ValidationException("Altes Passwort ist falsch");
         }
 
-        // Neues Passwort verschlüsseln und setzen
+        // Neues Passwort verschlüsseln und speichern
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.setUpdatedAt(LocalDateTime.now());
         userRepository.save(user);
@@ -283,11 +288,9 @@ public class UserServiceImpl implements UserService {
         final String targetAction = "Passwort Reset angefordert";
         System.out.println("DEBUG UserServiceImpl: Suche nach action = \"" + targetAction + "\" und Status IS NULL oder PENDING");
 
-        // Zuerst nach Status IS NULL suchen, da deine Logs das zeigen
         List<SystemLog> requestLogs = systemLogRepository.findByUserIdAndActionAndProcessedStatusIsNullOrderByTimestampDesc(userId, targetAction);
 
         if (requestLogs.isEmpty()) {
-            // Falls nichts mit NULL gefunden wurde, sicherheitshalber nochmal nach PENDING suchen
             System.out.println("DEBUG UserServiceImpl: Kein Log mit Status NULL gefunden für Action \"" + targetAction + "\". Suche nach Status PENDING.");
             requestLogs = systemLogRepository.findByUserIdAndActionAndProcessedStatusOrderByTimestampDesc(
                     userId,
@@ -428,7 +431,7 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new ValidationException("Rolle nicht gefunden"));
 
-        // Rolle hinzufügen, wenn der Benutzer sie noch nicht hat
+        // Rolle hinzufügen, prüfen ob Nutzer Rolle bereits hat
         if (user.getRoles().stream().noneMatch(r -> r.getName().equals(roleName))) {
             user.addRole(role);
             userRepository.save(user);

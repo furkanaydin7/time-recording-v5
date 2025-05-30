@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
  * DTO Antwort für Abwesenheiten Anfragen
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  * Quelle: https://techkluster.com/2023/08/21/dto-for-a-java-spring-application/
  */
 public class AbsenceResponse {
@@ -31,16 +30,16 @@ public class AbsenceResponse {
     private String lastName;
     private String email;
 
-    // Genehmiger-Informationen (NEU!)
+    // Genehmiger-Informationen
     private Long processedById;
     private String processedByName;
     private LocalDateTime processedDate;
 
-    // Ablehnungs-Informationen (NEU!)
+    // Ablehnungs-Informationen
     private String rejectionReason;
 
-    // Status für UI (NEU!)
-    private AbsenceStatus status; // Für Backward Compatibility
+    // Status für UI
+    private AbsenceStatus status;
 
     public AbsenceResponse() {}
 

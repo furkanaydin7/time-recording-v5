@@ -14,7 +14,6 @@ import java.util.Optional;
  * Repository für User Entitäten und CRUD Operationen
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

@@ -33,10 +33,12 @@ import java.util.stream.Collectors;
  * Nutzt ObjectMapper für Serialisierung und speichert im definierten Verzeichnis.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 @Service
 public class BackupServiceImpl implements BackupService {
 
+    // Logger für Informations- und Fehlerausgaben während des Backup-Prozesses
     private static final Logger logger = LoggerFactory.getLogger(BackupServiceImpl.class);
 
     private final UserRepository userRepository;
@@ -46,8 +48,11 @@ public class BackupServiceImpl implements BackupService {
     private final ObjectMapper objectMapper;
 
     @Value("${backup.storage.path}")
-    private String backupStoragePath;
+    private String backupStoragePath; // Pfad zum Verzeichnis, in dem Backup-Dateien abgelegt werden
 
+    /**
+     * Konstruktor zum Injizieren der Repository-Abhängigkeiten und Konfigurieren des ObjectMapper.
+     */
     public BackupServiceImpl(UserRepository userRepository,
                              ProjectRepository projectRepository,
                              TimeEntryRepository timeEntryRepository,
@@ -56,11 +61,17 @@ public class BackupServiceImpl implements BackupService {
         this.projectRepository = projectRepository;
         this.timeEntryRepository = timeEntryRepository;
         this.absenceRepository = absenceRepository;
+        // ObjectMapper konfigurieren für JavaTime-Module
         this.objectMapper = new ObjectMapper();
-        this.objectMapper.registerModule(new JavaTimeModule()); // Wichtig für LocalDateTime Serialisierung
+        this.objectMapper.registerModule(new JavaTimeModule());
         this.objectMapper.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
+    /**
+     * Erstellt ein Backup aller Systemdaten und speichert es als JSON-Datei.
+     * @return Absoluter Pfad der erstellten Backup-Datei
+     * @throws IOException bei Fehlern während der Dateioperationen
+     */
     @Override
     @Transactional(readOnly = true) // Lesende Transaktion für Konsistenz
     public String createBackup() throws IOException {
@@ -89,10 +100,11 @@ public class BackupServiceImpl implements BackupService {
         backupData.setAbsences(absences.stream().map(this::convertToAbsenceResponse).collect(Collectors.toList()));
         logger.info("{} Abwesenheiten gefunden.", absences.size());
 
-        // Backup-Datei erstellen
+        // Backup-Dateinamen mit Zeitstempel generieren
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String filename = "timerecording_backup_" + timestamp + ".json";
         Path backupDir = Paths.get(backupStoragePath);
+        // Erstelle Verzeichnis, falls nicht vorhanden
         if (!Files.exists(backupDir)) {
             Files.createDirectories(backupDir);
             logger.info("Backup-Verzeichnis erstellt: {}", backupDir.toAbsolutePath());
@@ -100,6 +112,7 @@ public class BackupServiceImpl implements BackupService {
         Path backupFilePath = backupDir.resolve(filename);
 
         try {
+            // Schreibe BackupData als formatierte JSON-Datei
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(backupFilePath.toFile(), backupData);
             logger.info("Backup erfolgreich erstellt: {}", backupFilePath.toAbsolutePath());
             return backupFilePath.toAbsolutePath().toString();
@@ -109,7 +122,9 @@ public class BackupServiceImpl implements BackupService {
         }
     }
 
-    // Konvertierungsmethoden (ähnlich zu den Controllern, hier zentralisiert)
+    /**
+     * Wandelt eine User-Entity in ein UserResponse-DTO um.
+     */
     private UserResponse convertToUserResponse(User user) {
         UserResponse response = new UserResponse();
         response.setId(user.getId());
@@ -125,6 +140,9 @@ public class BackupServiceImpl implements BackupService {
         return response;
     }
 
+    /**
+     * Wandelt eine Project-Entity in ein ProjectResponse-DTO um.
+     */
     private ProjectResponse convertToProjectResponse(Project project) {
         ProjectResponse response = new ProjectResponse();
         response.setId(project.getId());
@@ -133,18 +151,22 @@ public class BackupServiceImpl implements BackupService {
         response.setActive(project.isActive());
         response.setCreatedAt(project.getCreatedAt());
         response.setUpdatedAt(project.getUpdatedAt());
+        // Setze Dummy-Statistiken, um Nullpointer zu vermeiden
         if (project.getManager() != null) {
             ProjectResponse.ProjectStatistics stats = new ProjectResponse.ProjectStatistics();
-            // Hier könnten bei Bedarf Manager-Infos oder andere Details hinzugefügt werden
-            response.setStatistics(stats); // Dummy-Statistik, um NullPointer zu vermeiden
+            response.setStatistics(stats);
         }
         return response;
     }
 
+    /**
+     * Wandelt eine TimeEntry-Entity in ein TimeEntryResponse-DTO um.
+     */
     private TimeEntryResponse convertToTimeEntryResponse(TimeEntry timeEntry) {
         TimeEntryResponse response = new TimeEntryResponse();
         response.setId(timeEntry.getId());
         response.setDate(timeEntry.getDate());
+        // Konvertiere Zeiten in ISO-Format Strings
         response.setStartTimes(timeEntry.getStartTimes().stream().map(t -> t.format(DateTimeFormatter.ISO_LOCAL_TIME)).collect(Collectors.toList()));
         response.setEndTimes(timeEntry.getEndTimes().stream().map(t -> t.format(DateTimeFormatter.ISO_LOCAL_TIME)).collect(Collectors.toList()));
         response.setBreaks(timeEntry.getBreaks().stream().map(b -> {
@@ -158,12 +180,17 @@ public class BackupServiceImpl implements BackupService {
         response.setDifference(timeEntry.getDifference());
         response.setUserId(timeEntry.getUser().getId());
         response.setUser(timeEntry.getUser().getFullName());
+
+        // Optional: Projektdaten hinzufügen
         if (timeEntry.getProject() != null) {
             response.setProject(new TimeEntryResponse.ProjectDto(timeEntry.getProject().getId(), timeEntry.getProject().getName()));
         }
         return response;
     }
 
+    /**
+     * Wandelt eine Absence-Entity in ein AbsenceResponse-DTO um.
+     */
     private AbsenceResponse convertToAbsenceResponse(Absence absence) {
         AbsenceResponse response = new AbsenceResponse();
         response.setId(absence.getId());
@@ -177,6 +204,8 @@ public class BackupServiceImpl implements BackupService {
         response.setFirstName(absence.getUser().getFirstName());
         response.setLastName(absence.getUser().getLastName());
         response.setEmail(absence.getUser().getEmail());
+
+        // Optional: Informationen zum Bearbeiter hinzufügen
         if (absence.getApprover() != null) {
             response.setProcessedById(absence.getApprover().getId());
             response.setProcessedByName(absence.getApprover().getFullName());

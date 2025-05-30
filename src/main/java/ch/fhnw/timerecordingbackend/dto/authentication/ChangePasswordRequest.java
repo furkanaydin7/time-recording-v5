@@ -4,9 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * Anfrageobjekt zum Ändern des Passworts mit altem und neuem Passwort
+ * Anfrage-DTO zum Ändern des Passworts mit altem und neuem Passwort.
+ * Verwendet in /api/users/change-password.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 public class ChangePasswordRequest {
 

@@ -17,6 +17,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Zentrale Sicherheitskonfiguration für die Webanwendung.
+ * Stellt die Zugriffskontrolle, den JWT-Filter und die URL-Autorisierungen bereit.
+ * Verwendet Stateless-Authentifizierung (kein HTTP-Session-State).
+ * @author FA
+ * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -37,50 +45,75 @@ public class WebSecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
+    // Passwort-Verschlüsselung mit BCrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Hauptkonfiguration der HTTP-Security.
+     * Definiert, welche Endpunkte öffentlich, gesichert oder rollenbasiert erreichbar sind.
+     * Bindet den JWT-Filter ein.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // Konfiguriere URL-basierte Zugriffskontrolle
                 .authorizeHttpRequests(auth -> auth
+                        // Öffentliche Seiten und statische Ressourcen
                         .requestMatchers(
-                                "/",
-                                "/index.html",
-                                "/login.html",
-                                "/dashboard.html",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**",
+                                "/", "/index.html", "/login.html", "/dashboard.html",
+                                "/css/**", "/js/**", "/images/**", "/favicon.ico"
+                        ).permitAll()
+
+                        // Öffentliche API-Endpunkte (z. B. Login, Registrierung, Passwort-Reset)
+                        .requestMatchers(
                                 "/api/auth/**",
                                 "/api/public/registration-requests",
                                 "/api/public/managers",
-                                "/favicon.ico",
                                 "/api/users/request-password-reset"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/users/change-password").authenticated() // Passwort ändern nur für authentifizierte User
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN") // Alle /api/admin/** Endpunkte nur für Admins
-                        // .requestMatchers("/api/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/projects/manage/**").hasAnyAuthority("ADMIN", "MANAGER") // Beispiel für Manager-Rechte
+
+                        // Nur eingeloggte User dürfen Passwort ändern
+                        .requestMatchers(HttpMethod.PUT, "/api/users/change-password").authenticated()
+
+                        // Nur Admins & Manager dürfen die Benutzerliste sehen
+                        .requestMatchers("/api/admin/users").hasAnyAuthority("ADMIN", "MANAGER")
+
+                        // Nur Admins dürfen auf alle Admin-Endpunkte zugreifen
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+
+                        // Projektverwaltung (PUT /api/projects/{id}) nur für Admin & Manager
+                        .requestMatchers(HttpMethod.PUT, "/api/projects/{id}").hasAnyAuthority("ADMIN", "MANAGER")
+
+                        // Weitere projektbezogene Verwaltung nur für Admin & Manager
+                        .requestMatchers("/api/projects/manage/**").hasAnyAuthority("ADMIN", "MANAGER")
+
+                        // Zugriff auf Kernfunktionen (Zeiterfassung, Projekte, Reports, Absenzen)
                         .requestMatchers(
                                 "/api/time-entries/**",
                                 "/api/projects/**",
                                 "/api/reports/**",
                                 "/api/absences/**"
                         ).hasAnyAuthority("ADMIN", "MANAGER", "EMPLOYEE")
+
+                        // Alle anderen Anfragen erfordern Authentifizierung
                         .anyRequest().authenticated()
                 )
-                .formLogin(formLogin -> formLogin.disable()) // Standard-Form-Login deaktivieren, da JWT verwendet wird
-                .httpBasic(httpBasic -> httpBasic.disable()) // HTTP Basic Auth deaktivieren
-                .addFilterBefore( // JWT-Filter vor dem Standard-Username/Password-Filter einfügen
-                        jwtAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class
-                );
+
+                // Deaktiviere Standard-Login-Formular (da JWT verwendet wird)
+                .formLogin(formLogin -> formLogin.disable())
+
+                // Deaktiviere HTTP Basic Auth (ebenfalls wegen JWT)
+                .httpBasic(httpBasic -> httpBasic.disable())
+
+                // Füge den JWT-Filter vor dem UsernamePasswordAuthenticationFilter ein
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

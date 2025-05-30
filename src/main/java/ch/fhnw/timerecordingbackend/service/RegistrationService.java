@@ -14,11 +14,13 @@ public interface RegistrationService {
 
     Registration submitRegistrationRequest(RegistrationRequest requestDto);
 
-    // Rückgabetypen ändern sich auf die umbenannte Entität
-    List<Registration> getAllPendingRequests(); // ENTITÄTSNAME GEÄNDERT
-    List<Registration> getAllRequests(); // ENTITÄTSNAME GEÄNDERT
-    Optional<Registration> getRequestById(Long id); // ENTITÄTSNAME GEÄNDERT
+    List<Registration> getAllPendingRequests();
+
+    List<Registration> getAllRequests();
+
+    Optional<Registration> getRequestById(Long id);
 
     void approveRegistrationRequest(Long requestId, String adminEmail);
+
     void rejectRegistrationRequest(Long requestId, String adminEmail);
 }

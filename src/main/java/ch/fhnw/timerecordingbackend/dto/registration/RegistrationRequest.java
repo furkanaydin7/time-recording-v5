@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
  * DTO für Anfragen zum Registrieren eines Benutzers
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 public class RegistrationRequest {
 

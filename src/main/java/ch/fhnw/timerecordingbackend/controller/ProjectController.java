@@ -78,7 +78,7 @@ public class ProjectController {
     }
 
     /**
-     * Neues Projekt erstellen (nur Admin)
+     * Neues Projekt erstellen
      * POST /api/projects
      */
     @PostMapping
@@ -89,7 +89,7 @@ public class ProjectController {
         project.setName(request.getName());
         project.setDescription(request.getDescription());
 
-        // Manager zuweisen falls angegeben
+        // Manager zuweisen
         if (request.getManagerId() != null) {
             User manager = userService.findById(request.getManagerId())
                     .orElseThrow(() -> new IllegalArgumentException("Manager nicht gefunden mit ID: " + request.getManagerId()));
@@ -108,7 +108,7 @@ public class ProjectController {
     }
 
     /**
-     * Projekt aktualisieren (nur Admin und zugewiesener Manager)
+     * Projekt aktualisieren
      * PUT /api/projects/{id}
      */
     @PutMapping("/{id}")
@@ -267,9 +267,6 @@ public class ProjectController {
      * @return true wenn Benutzer Manager des Projekts ist
      */
     public boolean isProjectManager(Long projectId) {
-        // Diese Methode würde in einer echten Implementierung den aktuellen Benutzer
-        // aus dem SecurityContext holen und prüfen ob er Manager des Projekts ist
-        // Für jetzt als Platzhalter implementiert
         return true;
     }
 
@@ -303,11 +300,11 @@ public class ProjectController {
         String totalHoursWorked = projectService.calculateTotalActualHoursForProject(project.getId());
         statistics.setTotalHoursWorked(totalHoursWorked);
 
-        // Mitarbeiter, die an dem Projekt gearbeitet haben
+        // Mitarbeiter die an dem Projekt gearbeitet haben
         List<User> projectUsers = projectService.findUsersByProjectId(project.getId());
         statistics.setActiveEmployees(projectUsers.size());
 
-        // Konvertieren der Benutzer in eine Liste von UserResponse-DTOs
+        // Konvertieren der Benutzer in eine Liste von UserResponse
         List<UserResponse> involvedUsers = projectUsers.stream()
                 .map(user -> {
                     UserResponse userRes = new UserResponse();

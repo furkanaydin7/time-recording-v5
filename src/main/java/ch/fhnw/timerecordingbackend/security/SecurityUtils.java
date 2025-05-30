@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  * Stellt Methoden für Username- und Benutzerobjektzugriff bereit
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 @Component
 public class SecurityUtils {

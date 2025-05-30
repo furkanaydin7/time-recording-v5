@@ -4,14 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * Anfrageobjekt für das Zurücksetzen des Passworts anhand der E-Mail-Adresse
- * Validierung erfolgt über @NotBlank und @Email
+ * Anfrage-DTO zum Zurücksetzen des Passworts mittels E-Mail-Adresse.
+ * Validierung der E-Mail erfolgt über @NotBlank und @Email.
  * @author FA
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
+ * Kommentare und Code wurden mithilfe von KI ergänzt und erweitert.
  */
 public class ResetPasswordRequest {
 
-    // E-Mail-Adresse muss angegeben werden, darf nicht leer sein
+    // E-Mail-Adresse muss angegeben werden und muss dem E-Mail-Format entsprechen, darf nicht leer sein
     @NotBlank
     @Email
     private String email;

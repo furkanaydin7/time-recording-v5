@@ -1,4 +1,6 @@
 // * @author EK
+//Kommentare erzeugt it @ChatGPT
+//Code überarbeitet mit @ChatGPT
 
 window.projects = []; // Globale Variable für Projekte
 
@@ -50,10 +52,6 @@ function bindDashboardEventListeners() {
     // --- Zeiterfassung Karte ---
     document.getElementById('startTimer')?.addEventListener('click', startTimeTracking);
     document.getElementById('stopTimer')?.addEventListener('click', stopTimeTracking);
-    // Die Buttons mit onclick im HTML werden hier mit IDs versehen und Listener gebunden
-    // Wenn du `document.querySelector('button[onclick="..."]'` verwendest, stelle sicher, dass
-    // das onclick-Attribut im HTML bleibt oder entferne es und verlasse dich nur auf die ID.
-    // Es ist sauberer, onclick-Attribute zu entfernen und alles über addEventListener zu machen.
 
     const openManualEntryModalBtn = document.getElementById('openManualEntryModalBtn');
     if (openManualEntryModalBtn) openManualEntryModalBtn.addEventListener('click', openManualEntryModal);
@@ -114,8 +112,6 @@ function bindDashboardEventListeners() {
     // Data Display Schließen Button
     const hideDataDisplayBtn = document.getElementById('hideDataDisplayBtn'); // ID ist besser
     if (hideDataDisplayBtn) {
-        // Falls noch ein onclick-Attribut im HTML ist, kann es hier entfernt werden
-        // hideDataDisplayBtn.removeAttribute('onclick');
         hideDataDisplayBtn.addEventListener('click', hideDataDisplay);
     }
 
@@ -264,7 +260,7 @@ function bindDashboardEventListeners() {
     // Schließen bei Klick außerhalb des Modal-Contents
     window.addEventListener('click', function(event) {
         document.querySelectorAll('.modal').forEach(modal => {
-            if (event.target === modal) { // Nur wenn direkt auf das Modal-Overlay geklickt wird
+            if (event.target === modal) {
                 closeModal(modal.id);
             }
         });
@@ -334,12 +330,12 @@ function bindDashboardEventListeners() {
     // --- Keyboard Shortcuts ---
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            // Schließe das oberste offene Modal
+
             const openModals = document.querySelectorAll('.modal[style*="display: block"], .modal[style*="display:block"]');
             if (openModals.length > 0) {
-                closeModal(openModals[openModals.length - 1].id); // Schließe das letzte/oberste
+                closeModal(openModals[openModals.length - 1].id);
             } else if (document.getElementById('dataDisplay')?.style.display === 'block') {
-                hideDataDisplay(); // Wenn kein Modal offen, schließe dataDisplay
+                hideDataDisplay();
             }
         }
         // STRG + Enter für Start/Stop Timer
@@ -479,7 +475,7 @@ setInterval(() => {
 
     if (document.visibilityState === 'visible' && !isTimerCurrentlyActive) {
         console.log('Automatisches Neuladen der Dashboard-Daten...');
-        loadDashboardPageData(true); // true für forceRefresh (neue Daten vom Server)
+        loadDashboardPageData(true);
     }
 }, 5 * 60 * 1000); // 5 Minuten
 

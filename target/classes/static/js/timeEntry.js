@@ -1,7 +1,7 @@
 // * @author EK
 
 let activeTimeEntry = null;
-let startTimeForTimer = null; // Umbenannt von startTime um Konflikte zu vermeiden
+let startTimeForTimer = null;
 let timerInterval = null;
 let currentEditingTimeEntry = null;
 let editTimeSlotIdCounter = 0;
@@ -112,10 +112,10 @@ async function stopTimeTracking() {
     try {
         console.log('🛑 Stoppe Zeiterfassung für Eintrag ID:', activeTimeEntry.id);
         hideAllMessages();
-        // Der Backend-Endpoint ist /api/time-entries/{entryId}/stop
+        // Backend-Endpoint ist /api/time-entries/{entryId}/stop
         const response = await apiCall(`/api/time-entries/${activeTimeEntry.id}/stop`, {
             method: 'POST'
-            // Kein Body nötig laut Backend Controller
+
         });
 
         if (response) {
@@ -146,10 +146,10 @@ async function viewTimeEntries() {
     try {
         console.log('📋 Lade Zeiteinträge...');
         hideDataDisplay(); // Vorherige Ansicht schließen
-        const response = await apiCall(`/api/time-entries?_t=${Date.now()}`); // apiCall ist in apiClient.js
+        const response = await apiCall(`/api/time-entries?_t=${Date.now()}`);
         if (response && response.entries) {
             console.log(`✅ ${response.entries.length} Zeiteinträge geladen`);
-            displayData('Zeiteinträge', formatTimeEntriesTable(response.entries)); // displayData und format... in uiHelpers.js
+            displayData('Zeiteinträge', formatTimeEntriesTable(response.entries));
         } else {
             displayData('Zeiteinträge', '<p>Keine Zeiteinträge gefunden.</p>');
         }
@@ -194,10 +194,10 @@ function openManualEntryModal() {
 
 async function loadProjectsForManualEntry() {
     try {
-        // window.projects sollte durch loadDashboardPageData in dashboard.js gefüllt sein
+
         const projectSelect = document.getElementById('manualProject');
         if (window.projects && projectSelect) {
-            populateProjectDropdown(projectSelect, window.projects); // populate... ist in uiHelpers.js
+            populateProjectDropdown(projectSelect, window.projects);
         } else if (projectSelect) { // Fallback, falls window.projects nicht da ist
             const response = await apiCall('/api/projects/active');
             if (response && response.projects) {
@@ -234,7 +234,7 @@ function calculateWorkTime() {
         if (workDurationMs < 0) workDurationMs = 0;
 
         const totalWorkMinutes = Math.round(workDurationMs / (1000 * 60));
-        calculatedHoursDisplay.textContent = formatMinutesToHours(totalWorkMinutes); // formatMinutesToHours aus uiHelpers.js
+        calculatedHoursDisplay.textContent = formatMinutesToHours(totalWorkMinutes);
         return {
             workTimeInMinutes: totalWorkMinutes,
             breakTimeInMinutes: Math.round(breakDurationMs / (1000 * 60))
@@ -337,7 +337,7 @@ async function openEditTimeEntryModal(entry) {
     breakSlotsContainer.innerHTML = '';
     editBreakSlotIdCounter = 0;
     if (entry.breaks && entry.breaks.length > 0) {
-        entry.breaks.forEach(b => addEditBreakSlot(b.start, b.end)); // addEditBreakSlot aus uiHelpers.js
+        entry.breaks.forEach(b => addEditBreakSlot(b.start, b.end));
     }
 
     const editProjectSelect = document.getElementById('editProject');
@@ -354,7 +354,7 @@ async function openEditTimeEntryModal(entry) {
     }
 
     document.getElementById('editCalculatedHours').textContent = entry.actualHours || '--:--';
-    openModal('editTimeEntryModal'); // openModal aus uiHelpers.js
+    openModal('editTimeEntryModal');
 }
 
 async function handleEditTimeEntrySubmit(event) {
@@ -367,7 +367,7 @@ async function handleEditTimeEntrySubmit(event) {
     const startTimes = Array.from(document.querySelectorAll('#editTimeSlotsContainer input[name="editStartTimes"]'))
         .map(input => input.value).filter(Boolean);
     const endTimes = Array.from(document.querySelectorAll('#editTimeSlotsContainer input[name="editEndTimes"]'))
-        .map(input => input.value); // Leere Endzeiten erlauben (laufender Timer)
+        .map(input => input.value);
 
     const breaks = [];
     document.querySelectorAll('#editBreakSlotsContainer .break-slot-container').forEach(slot => {

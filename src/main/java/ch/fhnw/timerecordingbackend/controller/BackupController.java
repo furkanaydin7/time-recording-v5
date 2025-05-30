@@ -33,7 +33,7 @@ import java.util.stream.Stream;
  */
 @RestController
 @RequestMapping("/api/admin/backups")
-@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN')") // Nur Admins dürfen auf diese Endpunkte zugreifen
 public class BackupController {
 
     private static final Logger logger = LoggerFactory.getLogger(BackupController.class);
@@ -42,11 +42,16 @@ public class BackupController {
     private BackupService backupService;
 
     @Value("${backup.storage.path}")
-    private String backupStoragePath;
+    private String backupStoragePath; // Pfad zum Verzeichnis für Backup-Dateien
 
+    /**
+     * Löst manuell die Erstellung eines Backups aus.
+     * @return ResponseEntity mit Erfolgsmeldung und Pfad zur Datei oder Fehlermeldung
+     */
     @PostMapping("/create")
     public ResponseEntity<?> triggerBackup() {
         try {
+            // Delegation an den Service zur Erstellung eines Backups
             String backupPath = backupService.createBackup();
             return ResponseEntity.ok(Map.of(
                     "message", "Backup erfolgreich erstellt.",
@@ -59,13 +64,19 @@ public class BackupController {
         }
     }
 
+    /**
+     * Listet alle vorhandenen Backup-Dateien im konfigurierten Verzeichnis auf.
+     * @return ResponseEntity mit Liste der Dateinamen oder Fehlermeldung
+     */
     @GetMapping
     public ResponseEntity<?> listBackups() {
         Path backupDir = Paths.get(backupStoragePath);
+        // Prüfe, ob das Verzeichnis existiert und ein Verzeichnis ist
         if (!Files.exists(backupDir) || !Files.isDirectory(backupDir)) {
             return ResponseEntity.ok(Map.of("message", "Backup-Verzeichnis existiert nicht.", "files", List.of()));
         }
         try (Stream<Path> paths = Files.list(backupDir)) {
+            // Filtere nur reguläre Dateien mit dem Backup-Präfix und -Suffix
             List<String> filenames = paths
                     .filter(Files::isRegularFile)
                     .map(path -> path.getFileName().toString())
@@ -80,20 +91,29 @@ public class BackupController {
         }
     }
 
+    /**
+     * Ermöglicht den Download einer einzelnen Backup-Datei.
+     * Schützt vor Path-Traversal durch Präfix-/Suffix-Prüfung.
+     * @param filename Name der gewünschten Backup-Datei
+     * @return JSON-Ressource der Backup-Datei oder entsprechender Fehlerstatus
+     */
     @GetMapping("/{filename}")
     public ResponseEntity<Resource> downloadBackup(@PathVariable String filename) {
         Path backupDir = Paths.get(backupStoragePath);
         Path filePath = backupDir.resolve(filename);
 
+        // Schutz vor Path Traversal: nur erlaubte Dateinamen
         if (!filename.startsWith("timerecording_backup_") || !filename.endsWith(".json")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(null); // Vermeide potenziellen Path Traversal
+                    .body(null);
         }
 
         try {
+            // Erzeuge Resource aus dem Dateisystem-Pfad
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return ResponseEntity.ok()
+                        // Konfiguriere Antwort mit JSON-MediaType und Download-Header
                         .contentType(MediaType.APPLICATION_JSON)
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                         .body(resource);

@@ -10,7 +10,6 @@ import java.util.Optional;
  * Repository für Rollen Entitäten
  * @author PD
  * Code von anderen Teammitgliedern oder Quellen wird durch einzelne Kommentare deklariert
- * @version 1.0
  */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {

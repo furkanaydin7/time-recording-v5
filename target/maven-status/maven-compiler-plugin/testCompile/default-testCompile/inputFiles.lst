@@ -1,0 +1,11 @@
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/TimeRecordingBackendApplicationTests.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/controller/AdminControllerTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/controller/BackupControllerTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/controller/PublicRegistrationControllerTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/controller/TimeEntryControllerTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/controller/UserControllerTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/service/AbsenceServiceIntegrationTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/service/TimeEntryServiceIntegrationTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/service/UserServiceIntegrationTest.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/systemtest/SystemTestConfiguration.java
+/Users/Furkan/IdeaProjects/time-recording-backend/src/test/java/ch/fhnw/timerecordingbackend/systemtest/TimeRecordingSystemTest.java
