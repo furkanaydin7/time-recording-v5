@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Recording - Anmeldung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem; /* Etwas Abstand für kleinere Bildschirme */
+        }
+
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-btn { /* Gilt für Anmelden und Passwort Reset Button */
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 0.6rem;
+            background: linear-gradient(135deg, #4CAF50 0%, #689F38 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Gemeinsame Basis für Nachrichten-Divs */
+        .message-display {
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none; /* Standardmäßig versteckt */
+            font-size: 0.9rem;
+        }
+
+        .error-message { /* Wird für Login-Fehler und Reset-Fehler verwendet */
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+        }
+
+        .success-message { /* Wird für Login-Erfolg und Reset-Erfolg verwendet */
+            background: #efe;
+            color: #363;
+            border: 1px solid #cfc;
+        }
+
+        .demo-credentials {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 0.85rem;
+        }
+
+        .demo-credentials h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-credentials ul {
+            list-style: none;
+            padding-left: 0;
+            color: #666;
+        }
+
+        .demo-credentials li {
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 3px;
+            transition: background-color 0.2s ease;
+        }
+
+        .demo-credentials li:hover {
+            background-color: #e9ecef;
+        }
+
+        .demo-credentials strong {
+            color: #333;
+        }
+
+        .loading { /* Gilt für Login Loading und Reset Loading */
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+            color: #555;
+        }
+        .loading p {
+            color: #555;
+        }
+
+        /* Stile für den Passwort-vergessen-Container */
+        .forgot-password-container {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .forgot-password-container h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #444;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be responsive */
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group label {
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="login-header">
+        <h1>🕐 Time Recording</h1>
+        <p>Melden Sie sich an, um fortzufahren</p>
+    </div>
+
+    <div id="login-error-message" class="message-display error-message"></div>
+    <div id="login-success-message" class="message-display success-message"></div>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="email" required autocomplete="username" placeholder="admin@timerecording.ch">
+        </div>
+        <div class="form-group">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <button type="submit" class="login-btn" id="loginButton">Anmelden</button>
+        <button type="button" class="register-btn" id="openRegisterModalBtn">Registrieren</button>
+        <div class="loading" id="loginLoading"><p>🔄 Anmeldung läuft...</p></div>
+    </form>
+
+    <div class="demo-credentials">
+        <h3>📋 Demo-Anmeldedaten:</h3>
+        <ul>
+            <li data-email="admin@timerecording.ch" data-password="admin123"><strong>Admin:</strong> admin@timerecording.ch / admin123</li>
+            <li data-email="manager@timerecording.ch" data-password="manager123"><strong>Manager:</strong> manager@timerecording.ch / manager123</li>
+            <li data-email="anna.schmidt@timerecording.ch" data-password="employee123"><strong>Mitarbeiter:</strong> anna.schmidt@timerecording.ch / employee123</li>
+        </ul>
+    </div>
+
+    <div id="registerUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Registrierungsanfrage</h2> <form id="registerUserForm">
+            <div class="form-group">
+                <label for="regFirstName">Vorname:</label>
+                <input type="text" id="regFirstName" required>
+            </div>
+            <div class="form-group">
+                <label for="regLastName">Nachname:</label>
+                <input type="text" id="regLastName" required>
+            </div>
+            <div class="form-group">
+                <label for="regEmail">E-Mail:</label>
+                <input type="email" id="regEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="regRole">Gewünschte Rolle:</label>
+                <select id="regRole" required>
+                    <option value="EMPLOYEE">Mitarbeiter</option>
+                    <option value="MANAGER">Manager</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regManager">Manager (optional):</label>
+                <select id="regManager">
+                    <option value="">Kein Manager</option>
+                </select>
+            </div>
+            <button type="submit" class="login-btn">Anfrage senden</button>
+            <button type="button" class="register-btn" id="cancelRegisterBtn" style="background: #ccc; color: #333;">Abbrechen</button>
+        </form>
+            <div id="registerFeedback" class="success-message" style="display: none;"></div>
+            <div id="registerError" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <div class="forgot-password-container">
+        <h3>Passwort vergessen?</h3>
+        <div id="reset-error-message" class="message-display error-message"></div>
+        <div id="reset-success-message" class="message-display success-message"></div>
+        <form id="resetPasswordForm">
+            <div class="form-group">
+                <label for="resetEmail">E-Mail-Adresse</label>
+                <input type="email" id="resetEmail" name="resetEmail" required placeholder="Ihre registrierte E-Mail">
+            </div>
+            <button type="submit" class="login-btn" id="resetPasswordButton">Passwort zurücksetzen anfordern</button>
+            <div class="loading" id="resetLoading"><p>🔄 Anfrage wird gesendet...</p></div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        const loginErrorMessage = document.getElementById('login-error-message');
+        const loginSuccessMessage = document.getElementById('login-success-message');
+        const loginButton = document.getElementById('loginButton');
+        const loginLoading = document.getElementById('loginLoading');
+
+        const openRegisterModalBtn = document.getElementById('openRegisterModalBtn');
+        const registerUserModal = document.getElementById('registerUserModal');
+        const closeRegisterModalBtn = registerUserModal.querySelector('.close-button');
+        const cancelRegisterBtn = document.getElementById('cancelRegisterBtn');
+        const registerUserForm = document.getElementById('registerUserForm');
+        const regManagerSelect = document.getElementById('regManager');
+        const registerFeedback = document.getElementById('registerFeedback');
+        const registerError = document.getElementById('registerError');
+
+        const resetPasswordForm = document.getElementById('resetPasswordForm');
+        const resetEmailInput = document.getElementById('resetEmail');
+        const resetPasswordButton = document.getElementById('resetPasswordButton');
+        const resetErrorMessage = document.getElementById('reset-error-message');
+        const resetSuccessMessage = document.getElementById('reset-success-message');
+        const resetLoading = document.getElementById('resetLoading');
+
+        let isSubmitting = false;
+
+        function closeRegisterModal() {
+            registerUserModal.style.display = 'none';
+            registerUserForm.reset(); // Formular zurücksetzen
+            registerFeedback.style.display = 'none';
+            registerError.style.display = 'none';
+            const submitButton = registerUserForm.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Anfrage senden';
+            }
+            isSubmitting = false;
+        }
+
+        function displayMessage(element, message, isSuccess) {
+            if (!element) return;
+            element.textContent = (isSuccess ? '✅ ' : '❌ ') + message;
+            element.style.display = 'block';
+            setTimeout(() => {
+                if (element) element.style.display = 'none';
+            }, isSuccess ? 5000 : 7000);
+        }
+
+        document.querySelectorAll('.demo-credentials li').forEach(li => {
+            li.addEventListener('click', function() {
+                const email = this.getAttribute('data-email');
+                const password = this.getAttribute('data-password');
+                if (email && password) {
+                    document.getElementById('email').value = email;
+                    document.getElementById('password').value = password;
+                }
+            });
+        });
+
+        openRegisterModalBtn.addEventListener('click', async function() {
+            // Manager-Dropdown laden
+            try {
+                const response = await fetch('/api/public/managers', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const managers = await response.json();
+                    regManagerSelect.innerHTML = '<option value="">Kein Manager</option>';
+
+                    managers.forEach(manager => {
+                        const option = document.createElement('option');
+                        option.value = manager.id;
+                        option.textContent = `${manager.firstName} ${manager.lastName} (${manager.email})`;
+                        regManagerSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('Fehler beim Laden der Manager:', response.statusText);
+                    registerError.textContent = 'Fehler beim Laden der Managerliste.';
+                    registerError.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Netzwerkfehler beim Laden der Manager:', error);
+                registerError.textContent = 'Netzwerkfehler beim Laden der Managerliste.';
+                registerError.style.display = 'block';
+            }
+
+            registerUserModal.style.display = 'flex'; // Modal anzeigen
+        });
+
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            loginButton.disabled = true;
+            loginButton.textContent = 'Anmelden...';
+            loginLoading.style.display = 'block';
+            loginErrorMessage.style.display = 'none';
+            loginSuccessMessage.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    const token = data.accessToken || data.token;
+                    if (token) {
+                        localStorage.setItem('jwtToken', token);
+                        localStorage.setItem('tokenType', data.tokenType || 'Bearer');
+                        localStorage.setItem('userEmail', data.email || email);
+                        localStorage.setItem('userId', data.user.id);
+                        localStorage.setItem('userRoles', JSON.stringify(data.user ? data.user.roles || [] : []));
+                    }
+                    displayMessage(loginSuccessMessage, 'Anmeldung erfolgreich! Sie werden weitergeleitet...', true);
+                    setTimeout(() => { window.location.href = '/dashboard.html'; }, 1500);
+                } else {
+                    const errorMsg = data.message || data.error || 'Ungültige Anmeldedaten oder Serverfehler.';
+                    displayMessage(loginErrorMessage, errorMsg, false);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                displayMessage(loginErrorMessage, 'Verbindungsfehler. Bitte versuchen Sie es später erneut.', false);
+            } finally {
+                loginButton.disabled = false;
+                loginButton.textContent = 'Anmelden';
+                loginLoading.style.display = 'none';
+            }
+        });
+
+        resetPasswordForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = resetEmailInput.value;
+
+            if (!email) {
+                displayMessage(resetErrorMessage, 'Bitte geben Sie eine E-Mail-Adresse ein.', false);
+                return;
+            }
+
+            resetPasswordButton.disabled = true;
+            resetPasswordButton.textContent = 'Sende Anfrage...';
+            resetLoading.style.display = 'block';
+            resetErrorMessage.style.display = 'none';
+            resetSuccessMessage.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/users/request-password-reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // KEIN 'Authorization'-Header hier!
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                let data;
+                let responseBodyText = await response.text(); // Immer zuerst den Text lesen
+
+                if (response.ok) { // Status 200-299
+                    try {
+                        data = JSON.parse(responseBodyText);
+                        displayMessage(resetSuccessMessage, data.message || 'Anfrage erfolgreich verarbeitet.', true);
+                        resetEmailInput.value = '';
+                    } catch (jsonError) {
+                        console.warn("Antwort bei Erfolg war kein JSON, zeige Text:", responseBodyText);
+                        displayMessage(resetSuccessMessage, responseBodyText || 'Anfrage erfolgreich, aber unerwartete Antwort.', true);
+                        resetEmailInput.value = '';
+                    }
+                } else { // Fehlerfall (z.B. 403, 400, 500)
+                    console.error(`Fehler vom Server: ${response.status}`, responseBodyText);
+                    try {
+                        data = JSON.parse(responseBodyText);
+                        displayMessage(resetErrorMessage, data.message || data.error || `Fehler ${response.status}: ${responseBodyText}`, false);
+                    } catch (jsonError) {
+                        displayMessage(resetErrorMessage, `Fehler ${response.status}: ${responseBodyText || response.statusText || 'Unbekannter Serverfehler'}`, false);
+                    }
+                }
+            } catch (error) { // Netzwerkfehler oder anderer Fehler vor/während fetch
+                console.error('Password reset request error (catch block):', error);
+                displayMessage(resetErrorMessage, 'Netzwerkfehler oder Client-Fehler bei der Passwort-Reset-Anfrage. Bitte Konsole prüfen.', false);
+            } finally {
+                resetPasswordButton.disabled = false;
+                resetPasswordButton.textContent = 'Passwort zurücksetzen anfordern';
+                resetLoading.style.display = 'none';
+            }
+        });
+
+        // Event Listener für den Schließen-Button im Modal
+        closeRegisterModalBtn.addEventListener('click', closeRegisterModal);
+        cancelRegisterBtn.addEventListener('click', closeRegisterModal);
+
+        // Schließen des Modals, wenn ausserhalb geklickt wird (jetzt ausserhalb der Schleife)
+        window.addEventListener('click', function(event) {
+            if (event.target == registerUserModal) {
+                closeRegisterModal();
+            }
+        });
+
+        // Registrierungsformular absenden (jetzt ausserhalb der Schleife)
+        registerUserForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (isSubmitting) {
+                console.log("Anfrage wird bereits gesendet, zweite Übermittlung verhindert.");
+                return;
+            }
+
+            isSubmitting = true;
+
+            registerFeedback.style.display = 'none';
+            registerError.style.display = 'none';
+
+            const submitButton = registerUserForm.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Anfrage wird gesendet...';
+            }
+
+            const firstName = document.getElementById('regFirstName').value.trim();
+            const lastName = document.getElementById('regLastName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const role = document.getElementById('regRole').value;
+            const managerId = regManagerSelect.value ? parseInt(regManagerSelect.value) : null;
+
+            const registrationData = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                role: role,
+                managerId: managerId
+            };
+
+            try {
+                // Senden der Registrierungsanfrage an den öffentlichen Endpunkt
+                const response = await fetch('/api/public/registration-requests', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(registrationData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    registerFeedback.textContent = '✅ Ihre Registrierungsanfrage wurde erfolgreich gesendet und wird vom Administrator geprüft.';
+                    registerFeedback.style.display = 'block';
+                    registerUserForm.reset();
+                    setTimeout(closeRegisterModal, 5000);
+                } else {
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMsg = errorData.message || 'Fehler beim Senden der Registrierungsanfrage.';
+                    registerError.textContent = `❌ ${errorMsg}`;
+                    registerError.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Registrierungsfehler:', error);
+                registerError.textContent = '❌ Verbindungsfehler. Bitte versuchen Sie es später erneut.';
+                registerError.style.display = 'block';
+            } finally {
+                isSubmitting = false;
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Anfrage senden';
+                }
+            }
+
+        });
+    });
+</script>
+</body>
+</html>

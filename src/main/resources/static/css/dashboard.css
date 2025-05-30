@@ -1,0 +1,336 @@
+/* @author EK
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-left h1 {
+    font-size: 1.5rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logout-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-small { /* Nützlich für Buttons in Tabellen oder Modals */
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.modal {
+    display: none; /* Standardmäßig versteckt */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow-y: auto; /* Ermöglicht Scrollen bei langem Modal-Inhalt */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto; /* Etwas Abstand von oben und zentriert */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Responsive Breite */
+    max-width: 600px; /* Maximale Breite */
+    border-radius: 10px;
+    position: relative; /* Wichtig für die absolute Positionierung des Schließen-Buttons */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal .close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1; /* Verhindert zusätzlichen Abstand */
+}
+
+.modal .close:hover,
+.modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block; margin-bottom: 0.5rem; font-weight: 500;
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;
+}
+.form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
+}
+.calculated-time {
+    background: #f8f9fa; padding: 1rem; border-radius: 5px; margin: 1rem 0; text-align: center;
+}
+.calculated-hours {
+    font-size: 1.5rem; font-weight: bold; color: #667eea; margin-top: 0.5rem;
+}
+.data-table {
+    width: 100%; border-collapse: collapse; margin-top: 1rem;
+}
+.data-table th, .data-table td {
+    padding: 0.75rem; text-align: left; border-bottom: 1px solid #ddd;
+}
+.data-table th {
+    background-color: #f8f9fa; font-weight: 600;
+}
+.data-table tr:hover {
+    background-color: #f0f0f0;
+}
+.loading {
+    text-align: center; padding: 2rem; color: #666;
+}
+.error {
+    background: #fee; color: #c33; padding: 1rem; border-radius: 5px; margin-bottom: 1rem; text-align: left; border-left: 4px solid #dc3545;
+}
+.success {
+    background: #efe; color: #363; padding: 1rem; border-radius: 5px; margin-bottom: 1rem; text-align: center; border-left: 4px solid #28a745;
+}
+.warning {
+    background: #fff3cd; color: #856404; padding: 1rem; border-radius: 5px; margin-bottom: 1rem; text-align: left; border-left: 4px solid #ffc107;
+}
+.timer-display {
+    font-size: 2rem; font-weight: bold; color: #28a745; text-align: center; margin: 1rem 0;
+}
+.timer-running {
+    color: #dc3545; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    } 50% {
+              opacity: 0.7;
+          } 100% {
+                          opacity: 1;
+                      }
+}
+.debug-info {
+    background: #333; color: #0f0; padding: 0.5rem; border-radius: 5px; font-family: monospace; font-size: 0.8rem; margin: 1rem 0;
+}
+.duplicate-info {
+    background: #e7f3ff; border: 1px solid #b6d7ff; border-radius: 8px; padding: 1rem; margin: 1rem 0;
+}
+.duplicate-info h4 {
+    color: #004085; margin-bottom: 0.5rem;
+}
+.duplicate-info ul {
+    margin: 0.5rem 0; padding-left: 1.5rem;
+}
+.duplicate-info li {
+    margin-bottom: 0.25rem; color: #004085;
+}
+.system-info {
+    background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; padding: 0.75rem; margin: 1rem 0; font-size: 0.9rem;
+}
+
+.remove-slot-btn-container, .remove-break-btn-container {
+    align-self: flex-end; margin-bottom: 1rem;
+}
+.user-role-tag {
+    display: inline-flex; align-items: center; background-color: #e0e7ff; color: #3f51b5; padding: 0.3em 0.6em; border-radius: 12px; font-size: 0.75em; margin-right: 5px; margin-bottom: 5px; white-space: nowrap;
+}
+.user-role-tag .remove-role-btn {
+    margin-left: 5px; padding: 0.1em 0.4em; line-height: 1; font-size: 0.8em; border-radius: 50%; background-color: #ef5350; color: white; border: none; cursor: pointer;
+}
+.user-role-tag .remove-role-btn:hover {
+    background-color: #d32f2f;
+}
+
+@media (
+max-width: 768px)
+{
+    header {
+        flex-direction: column; gap: 1rem; text-align: center;
+    }
+    .container {
+        padding: 0 1rem;
+    }
+    .dashboard-grid, .stats-grid { grid-template-columns: 1fr;
+    }
+    .action-buttons {
+        flex-direction: column;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .data-table {
+        font-size: 0.9rem;
+    }
+    .data-table th, .data-table td {
+        padding: 0.5rem;
+    }
+}
