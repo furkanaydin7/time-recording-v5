@@ -17,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -40,7 +39,6 @@ import static org.hamcrest.Matchers.is;
  * Quelle: ChatGPT.com
  */
 
-@ActiveProfiles("test")
 @WebMvcTest(PublicRegistrationController.class)
 @Import({WebSecurityConfig.class, UserDetailsServiceImpl.class, JwtTokenProvider.class})
 class PublicRegistrationControllerTest {

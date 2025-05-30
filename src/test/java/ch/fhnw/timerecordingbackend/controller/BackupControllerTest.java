@@ -13,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,7 +32,7 @@ import static org.hamcrest.Matchers.is;
  * Quelle: ChatGPT.com
  */
 
-@ActiveProfiles("test")
+
 @WebMvcTest(BackupController.class)
 @Import({WebSecurityConfig.class, UserDetailsServiceImpl.class, JwtTokenProvider.class})
 @TestPropertySource(properties = {"backup.storage.path=./test-backups"}) // Override für Test

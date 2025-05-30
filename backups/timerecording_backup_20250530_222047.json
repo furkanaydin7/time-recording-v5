@@ -1,0 +1,138 @@
+{
+  "backupTimestamp" : "2025-05-30T22:20:47.436147",
+  "users" : [ {
+    "id" : 1,
+    "firstName" : "System",
+    "lastName" : "Administrator",
+    "email" : "admin@timerecording.ch",
+    "active" : true,
+    "status" : "ACTIVE",
+    "plannedHoursPerDay" : 8.0,
+    "roles" : [ "ADMIN" ],
+    "createdAt" : null,
+    "updatedAt" : null,
+    "temporaryPassword" : null,
+    "message" : null,
+    "managerId" : null,
+    "managerName" : null,
+    "fullName" : "System Administrator"
+  }, {
+    "id" : 2,
+    "firstName" : "Max",
+    "lastName" : "Manager",
+    "email" : "manager@timerecording.ch",
+    "active" : true,
+    "status" : "ACTIVE",
+    "plannedHoursPerDay" : 8.0,
+    "roles" : [ "MANAGER" ],
+    "createdAt" : null,
+    "updatedAt" : null,
+    "temporaryPassword" : null,
+    "message" : null,
+    "managerId" : null,
+    "managerName" : null,
+    "fullName" : "Max Manager"
+  }, {
+    "id" : 3,
+    "firstName" : "Anna",
+    "lastName" : "Schmidt",
+    "email" : "anna.schmidt@timerecording.ch",
+    "active" : true,
+    "status" : "ACTIVE",
+    "plannedHoursPerDay" : 8.0,
+    "roles" : [ "EMPLOYEE" ],
+    "createdAt" : null,
+    "updatedAt" : "2025-05-30T22:20:47.312953",
+    "temporaryPassword" : null,
+    "message" : null,
+    "managerId" : null,
+    "managerName" : null,
+    "fullName" : "Anna Schmidt"
+  }, {
+    "id" : 4,
+    "firstName" : "Test",
+    "lastName" : "User",
+    "email" : "test.user@timerecording.ch",
+    "active" : false,
+    "status" : "INACTIVE",
+    "plannedHoursPerDay" : 8.0,
+    "roles" : [ "EMPLOYEE" ],
+    "createdAt" : "2025-05-30T22:20:44.284633",
+    "updatedAt" : "2025-05-30T22:20:47.415568",
+    "temporaryPassword" : null,
+    "message" : null,
+    "managerId" : null,
+    "managerName" : null,
+    "fullName" : "Test User"
+  } ],
+  "projects" : [ {
+    "id" : 1,
+    "name" : "Test Project",
+    "description" : "Ein Testprojekt für den Systemtest",
+    "active" : true,
+    "createdAt" : "2025-05-30T22:20:44.527617",
+    "updatedAt" : "2025-05-30T22:20:44.592436",
+    "statistics" : {
+      "totalTimeEntries" : 0,
+      "activeEmployees" : 0,
+      "totalHoursWorked" : null
+    },
+    "involvedUsers" : null,
+    "managerId" : null,
+    "managerName" : null
+  } ],
+  "timeEntries" : [ {
+    "id" : 1,
+    "date" : "2025-05-29",
+    "startTimes" : [ "08:30:00" ],
+    "endTimes" : [ "17:30:00" ],
+    "breaks" : [ {
+      "start" : "12:00:00",
+      "end" : "13:00:00"
+    } ],
+    "actualHours" : "08:00",
+    "plannedHours" : "08:00",
+    "difference" : "+00:00",
+    "project" : {
+      "id" : 1,
+      "name" : "Test Project"
+    },
+    "userId" : 3,
+    "user" : "Anna Schmidt"
+  }, {
+    "id" : 2,
+    "date" : "2025-05-30",
+    "startTimes" : [ "22:20:44.775" ],
+    "endTimes" : [ "22:20:46.837" ],
+    "breaks" : [ ],
+    "actualHours" : "00:00",
+    "plannedHours" : "08:00",
+    "difference" : "-08:00",
+    "project" : {
+      "id" : 1,
+      "name" : "Test Project"
+    },
+    "userId" : 3,
+    "user" : "Anna Schmidt"
+  } ],
+  "absences" : [ {
+    "id" : 1,
+    "startDate" : "2025-06-06",
+    "endDate" : "2025-06-08",
+    "type" : "VACATION",
+    "comment" : null,
+    "createdAt" : "2025-05-30T22:20:46.943955",
+    "updatedAt" : "2025-05-30T22:20:47.104696",
+    "userId" : 3,
+    "firstName" : "Anna",
+    "lastName" : "Schmidt",
+    "email" : "anna.schmidt@timerecording.ch",
+    "processedById" : 2,
+    "processedByName" : "Max Manager",
+    "processedDate" : null,
+    "rejectionReason" : null,
+    "status" : "APPROVED",
+    "durationInDays" : 3,
+    "fullName" : "Anna Schmidt"
+  } ]
+}

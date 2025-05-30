@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ch.fhnw.timerecordingbackend.TimeRecordingBackendApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.706 s -- in ch.fhnw.timerecordingbackend.TimeRecordingBackendApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.385 s -- in ch.fhnw.timerecordingbackend.TimeRecordingBackendApplicationTests
