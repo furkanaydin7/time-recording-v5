@@ -1,0 +1,373 @@
+<!--@author EK-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Recording - Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<header>
+  <div class="header-left"><h1>Time Recording Dashboard</h1></div>
+  <div class="header-right">
+    <div class="user-info"><span>👤</span><span id="userEmail">Lädt...</span><span id="changePasswordIcon" title="Passwort ändern" style="cursor: pointer; margin-left: 10px;">🔑</span></div>
+    <button id="logoutButton" class="logout-btn">Abmelden</button>
+  </div>
+</header>
+
+<div class="container">
+  <div id="errorMessage" class="error" style="display: none;"></div>
+  <div id="successMessage" class="success" style="display: none;"></div>
+  <div id="warningMessage" class="warning" style="display: none;"></div>
+  <div class="system-info"><strong>ℹ️ System-Info:</strong> Pro Tag nur ein Zeiteintrag. Änderungen über Bearbeiten.</div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-number" id="totalHours">--</div><div class="stat-label">Std. diese Woche</div></div>
+    <div class="stat-card"><div class="stat-number" id="projectCount">--</div><div class="stat-label">Aktive Projekte</div></div>
+    <div class="stat-card"><div class="stat-number" id="entryCount">--</div><div class="stat-label">Einträge heute</div></div>
+    <div class="stat-card"><div class="stat-number" id="pendingAbsences">--</div><div class="stat-label">Offene Abwesenheiten</div></div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <h2>⏰ Zeiterfassung</h2>
+      <div class="timer-display" id="timerDisplay">00:00:00</div>
+      <p id="currentProject">Kein Projekt ausgewählt</p>
+      <div class="action-buttons">
+        <button class="btn btn-success" id="startTimer">Zeit starten</button>
+        <button class="btn btn-danger" id="stopTimer" style="display: none;">Zeit stoppen</button>
+        <button class="btn btn-info" id="openManualEntryModalBtn">Manueller Eintrag</button>
+        <button class="btn btn-secondary" id="viewTimeEntriesBtn">Einträge anzeigen</button>
+        <button class="btn btn-info" id="viewEmployeeTimeEntriesBtn" style="display: none;">Einträge anzeigen (Mitarbeiter)</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>📁 Projekte</h2><p>Projekte verwalten und Zeiteinträge zuweisen.</p>
+      <div class="action-buttons"><button class="btn btn-primary" id="viewProjectsBtn">Projekte anzeigen</button><button class="btn btn-secondary" id="createProjectBtn" style="display: none;">Neues Projekt</button></div>
+    </div>
+    <div class="card">
+      <h2>🏖️ Abwesenheiten</h2><p>Urlaubsanträge und Abwesenheiten verwalten.</p>
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="viewAbsencesBtn">Abwesenheiten anzeigen</button>
+        <button class="btn btn-secondary" id="openCreateAbsenceModalBtn">Abwesenheit beantragen</button>
+        <button class="btn btn-warning" id="viewPendingAbsencesBtn" style="display: none;">Ausstehende Anträge</button>
+        <button class="btn btn-info" id="viewTeamOrAllApprovedAbsencesBtn" style="display: none;">Genehmigte Abw. (Team/Alle)</button>
+      </div>
+    </div>
+    <div class="card" id="adminCard" style="display: none;">
+      <h2>⚙️ Administration</h2><p>Benutzer, Projekte und Systemeinstellungen verwalten.</p>
+      <div class="action-buttons">
+        <button class="btn btn-success" id="viewUsersBtn">Benutzer verwalten</button><button class="btn btn-primary" id="openCreateUserModalBtn">Neuen Benutzer anlegen</button>
+        <button class="btn btn-warning" id="viewRegistrationRequestsBtn">Registrierungsanfragen</button> <button class="btn btn-secondary" id="viewSystemLogsBtn">System-Logs</button>
+        <button class="btn btn-secondary" id="viewSystemLogsBtn">System-Logs</button><button class="btn btn-warning" id="debugTokenBtn">Debug Token</button>
+        <button class="btn btn-info" id="checkSystemStatusBtn">System Check</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="dataDisplay" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+      <h2 id="dataTitle">Daten</h2><button id="hideDataDisplayBtn" class="btn btn-secondary">Schließen</button>
+    </div>
+    <div id="dataContent"><div class="loading">🔄 Lade Daten...</div></div>
+  </div>
+  <div class="loading" id="loading" style="display: none;">🔄 Lade Dashboard-Daten...</div>
+</div>
+
+<!-- Modal: Manueller Zeiteintrag -->
+<div id="manualEntryModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>📝 Manueller Zeiteintrag</h2>
+    <form id="manualEntryForm">
+      <div class="form-group"><label for="manualDate">Datum:</label><input type="date" id="manualDate" required></div>
+      <div class="form-row"><div class="form-group"><label for="manualStartTime">Startzeit:</label><input type="time" id="manualStartTime" required></div><div class="form-group"><label for="manualEndTime">Endzeit:</label><input type="time" id="manualEndTime" required></div></div>
+      <div class="form-row"><div class="form-group"><label for="manualBreakStartTime">Pause Start:</label><input type="time" id="manualBreakStartTime"></div><div class="form-group"><label for="manualBreakEndTime">Pause Ende:</label><input type="time" id="manualBreakEndTime"></div></div>
+      <div class="form-group"><label for="manualProject">Projekt:</label><select id="manualProject"><option value="">Kein Projekt</option></select></div>
+      <div class="calculated-time"><div>Berechnete Arbeitszeit:</div><div class="calculated-hours" id="calculatedHours">00:00</div></div>
+      <div class="action-buttons"><button type="submit" class="btn btn-primary">Eintrag erstellen</button><button type="button" id="cancelManualEntryBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Zeiteintrag bearbeiten -->
+<div id="editTimeEntryModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>📝 Zeiteintrag bearbeiten</h2>
+    <form id="editTimeEntryForm">
+      <input type="hidden" id="editTimeEntryId">
+      <div class="form-group"><label for="editDate">Datum:</label><input type="date" id="editDate" class="form-input" required></div>
+      <hr><h4 id="editTimeSlotsTitle">Arbeitszeiten</h4><div id="editTimeSlotsContainer"></div>
+      <button type="button" id="addEditTimeSlotBtn" class="btn btn-secondary btn-small" style="margin:0.5rem 0 1rem;">+ Arbeitszeit-Slot</button>
+      <hr><h4 id="editBreakSlotsTitle">Pausen</h4><div id="editBreakSlotsContainer"></div>
+      <button type="button" id="addEditBreakSlotBtn" class="btn btn-secondary btn-small" style="margin:0.5rem 0 1rem;">+ Pause</button>
+      <hr><div class="form-group"><label for="editProject">Projekt:</label><select id="editProject" class="form-input"><option value="">Kein Projekt</option></select></div>
+      <div class="calculated-time"><div>Berechnete Arbeitszeit:</div><div class="calculated-hours" id="editCalculatedHours">--:--</div></div>
+      <div class="action-buttons"><button type="submit" class="btn btn-primary">Änderungen speichern</button><button type="button" id="cancelEditTimeEntryBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Neues Projekt -->
+<div id="createProjectModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Neues Projekt erstellen</h2>
+    <form id="createProjectForm">
+      <div class="form-group"><label for="projectName">Projektname:</label><input type="text" id="projectName" required></div>
+      <div class="form-group"><label for="projectDescription">Beschreibung:</label><textarea id="projectDescription" rows="3"></textarea></div>
+      <div class="form-group"><label for="projectManager">Manager:</label><select id="projectManager" required><option value="">Manager wählen</option></select></div>
+      <div class="action-buttons"><button type="submit" class="btn btn-primary">Erstellen</button><button type="button" id="cancelCreateProjectBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Abwesenheit beantragen -->
+<div id="createAbsenceModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Abwesenheit beantragen</h2>
+    <form id="createAbsenceForm">
+      <div class="form-group"><label for="absenceType">Typ:</label><select id="absenceType" required><option value="">Wählen...</option><option value="VACATION">Urlaub</option><option value="ILLNESS">Krankheit</option><option value="HOME_OFFICE">Home Office</option><option value="TRAINING">Fortbildung</option><option value="OTHER">Sonstiges</option></select></div>
+      <div class="form-group"><label for="startDate">Von:</label><input type="date" id="startDate" required></div>
+      <div class="form-group"><label for="endDate">Bis:</label><input type="date" id="endDate" required></div>
+      <div class="action-buttons"><button type="submit" class="btn btn-primary">Beantragen</button><button type="button" id="cancelCreateAbsenceBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Duplikat-Info -->
+<div id="duplicateInfoModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>📅 Zeiteintrag bereits vorhanden</h2>
+    <div class="duplicate-info"><h4>Für das gewählte Datum existiert bereits ein Zeiteintrag!</h4><p>Optionen:</p><ul><li>Bearbeiten</li><li>Anderes Datum</li><li>Live-Timer</li></ul></div>
+    <div class="action-buttons"><button id="duplicateInfoViewEntriesBtn" class="btn btn-primary">Einträge anzeigen</button><button id="duplicateInfoChangeDateBtn" class="btn btn-info">Anderes Datum</button><button id="duplicateInfoCloseBtn" class="btn btn-secondary">Schließen</button></div>
+  </div>
+</div>
+
+<!-- Modal: Projekt Details -->
+<div id="projectDetailModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Projekt Details: <span id="detailProjectName"></span></h2>
+    <div id="projectDetailContent">
+      <div class="form-group">
+        <label>Name:</label>
+        <span id="detailProjectName"></span>
+      </div>
+      <div class="form-group">
+        <label>Beschreibung:</label>
+        <span id="detailProjectDescription"></span>
+      </div>
+      <div class="form-group">
+        <label>Manager:</label>
+        <span id="detailProjectManager"></span>
+      </div>
+      <div class="form-group">
+        <label>Status:</label>
+        <span id="detailProjectStatus"></span>
+      </div>
+      <div class="form-group">
+        <label>Erstellt am:</label>
+        <span id="detailProjectCreatedAt"></span>
+      </div>
+      <div class="form-group">
+        <label>Aktualisiert am:</label>
+        <span id="detailProjectUpdatedAt"></span>
+      </div>
+      <div class="form-group">
+        <label>Gesamtstunden:</label>
+        <span id="detailProjectTotalHours"></span>
+      </div>
+      <div class="form-group">
+        <label>Beteiligte Mitarbeiter:</label>
+        <span id="detailProjectInvolvedEmployees"></span>
+      </div>
+      <div class="form-group">
+        <label>Mitarbeiterliste:</label>
+        <ul id="detailProjectUsersList"></ul>
+      </div>
+
+      <!-- Projekt-Bearbeitung (nur für Admins/Manager) -->
+      <div id="projectEditSection" style="display: none;">
+        <hr>
+        <h3>Projekt bearbeiten</h3>
+        <form id="editProjectForm">
+          <input type="hidden" id="editProjectId">
+          <div class="form-group">
+            <label for="editProjectStatus">Status:</label>
+            <select id="editProjectStatus">
+              <option value="true">Aktiv</option>
+              <option value="false">Inaktiv</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editProjectManager">Manager:</label>
+            <select id="editProjectManager">
+              <option value="">Nicht zugewiesen</option>
+            </select>
+          </div>
+          <div class="action-buttons">
+            <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+            <button type="button" id="deleteProjectBtn" class="btn btn-danger" style="display: none;">Projekt deaktivieren</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="action-buttons" style="margin-top:1rem;">
+      <button type="button" id="closeProjectDetailModalBtn" class="btn btn-secondary">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Benutzer Details -->
+<div id="userDetailModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Benutzerdetails: <span id="detailUserName"></span></h2>
+    <div id="userDetailContent">
+      <div class="form-group">
+        <label>Name:</label>
+        <span id="detailUserName"></span>
+      </div>
+      <div class="form-group">
+        <label>E-Mail:</label>
+        <span id="detailUserEmail"></span>
+      </div>
+      <div class="form-group">
+        <label>Status:</label>
+        <span id="detailUserStatus"></span>
+      </div>
+      <div class="form-group">
+        <label>Geplante Stunden/Tag:</label>
+        <span id="detailUserPlannedHours"></span>
+      </div>
+      <div class="form-group">
+        <label>Erstellt am:</label>
+        <span id="detailUserCreatedAt"></span>
+      </div>
+      <div class="form-group">
+        <label>Aktualisiert am:</label>
+        <span id="detailUserUpdatedAt"></span>
+      </div>
+      <div class="form-group">
+        <label>Rollen:</label>
+        <div id="userRolesList"></div>
+      </div>
+
+      <!-- Benutzer-Verwaltung -->
+      <hr>
+      <h3>Benutzer verwalten</h3>
+      <div class="form-group">
+        <label for="userStatusSelect">Status ändern:</label>
+        <select id="userStatusSelect">
+          <option value="ACTIVE">Aktiv</option>
+          <option value="INACTIVE">Inaktiv</option>
+        </select>
+        <button type="button" id="updateUserStatusBtn" class="btn btn-warning btn-small" style="margin-left: 10px;">Status aktualisieren</button>
+      </div>
+      <div class="form-group">
+        <label for="addRoleSelect">Rolle hinzufügen:</label>
+        <select id="addRoleSelect">
+          <option value="">Rolle auswählen</option>
+        </select>
+        <button type="button" id="addRoleBtn" class="btn btn-success btn-small" style="margin-left: 10px;">Rolle hinzufügen</button>
+      </div>
+      <div class="form-group">
+        <button type="button" id="resetPasswordBtn" class="btn btn-danger">Passwort zurücksetzen</button>
+      </div>
+    </div>
+    <div class="action-buttons" style="margin-top:1rem;">
+      <button type="button" id="closeUserDetailModalBtn" class="btn btn-secondary">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Neuen Benutzer anlegen -->
+<div id="createUserModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Neuen Benutzer anlegen</h2>
+    <form id="createUserForm">
+      <div class="form-group"><label for="newFirstName">Vorname:</label><input type="text" id="newFirstName" class="form-input" required></div>
+      <div class="form-group"><label for="newLastName">Nachname:</label><input type="text" id="newLastName" class="form-input" required></div>
+      <div class="form-group"><label for="newEmail">E-Mail:</label><input type="email" id="newEmail" class="form-input" required></div>
+      <div class="form-group"><label for="newUserRole">Rolle:</label><select id="newUserRole" class="form-input" required></select></div>
+      <div class="form-group">
+        <label for="newUserParentManager">Übergeordneter Manager (Optional):</label>
+        <select id="newUserParentManager" class="form-input">
+          <option value="">Kein direkter Manager</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="newPlannedHours">Sollstd./Tag:</label><input type="number" id="newPlannedHours" class="form-input" value="8.0" min="1" step="0.5" required></div>
+      <p class="system-info">ℹ️ Initialpasswort: Nachname (klein).</p>
+      <div class="form-actions"><button type="submit" id="createUserSubmitBtn" class="btn btn-primary">Anlegen</button><button type="button" id="cancelCreateUserBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+    <div id="createUserFeedback" class="success" style="display: none;"></div><div id="createUserError" class="error" style="display: none;"></div>
+  </div>
+</div>
+
+<!-- Modal: Passwort ändern -->
+<div id="changePasswordModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>🔑 Passwort ändern</h2>
+    <form id="changePasswordForm">
+      <div class="form-group"><label for="oldPassword">Altes Passwort:</label><input type="password" id="oldPassword" class="form-input" required></div>
+      <div class="form-group"><label for="newPassword">Neues Passwort:</label><input type="password" id="newPassword" class="form-input" required minlength="6"></div>
+      <div class="form-group"><label for="confirmNewPassword">Neues Passwort bestätigen:</label><input type="password" id="confirmNewPassword" class="form-input" required minlength="6"></div>
+      <div class="action-buttons"><button type="submit" class="btn btn-primary">Passwort ändern</button><button type="button" id="cancelChangePasswordBtn" class="btn btn-secondary">Abbrechen</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Abwesenheit bearbeiten -->
+<div id="editAbsenceModal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-modal-id-to-close="editAbsenceModal">&times;</span>
+    <h2>Abwesenheit bearbeiten</h2>
+    <form id="editAbsenceForm">
+      <input type="hidden" id="editAbsenceId">
+      <div class="form-group">
+        <label for="editAbsenceType">Typ:</label>
+        <select id="editAbsenceType" required>
+          <option value="VACATION">Urlaub</option>
+          <option value="ILLNESS">Krankheit</option>
+          <option value="HOME_OFFICE">Home Office</option>
+          <option value="TRAINING">Fortbildung</option>
+          <option value="OTHER">Sonstiges</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="editAbsenceStartDate">Von:</label>
+        <input type="date" id="editAbsenceStartDate" required>
+      </div>
+      <div class="form-group">
+        <label for="editAbsenceEndDate">Bis:</label>
+        <input type="date" id="editAbsenceEndDate" required>
+      </div>
+      <div class="form-group">
+        <label for="editAbsenceComment">Kommentar (optional):</label>
+        <textarea id="editAbsenceComment" rows="3"></textarea>
+      </div>
+      <div class="action-buttons">
+        <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+        <button type="button" id="cancelEditAbsenceBtn" class="btn btn-secondary">Abbrechen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/apiClient.js"></script>
+<script src="js/uiHelpers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/timeEntry.js"></script>
+<script src="js/projectManagement.js"></script>
+<script src="js/absenceManagement.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

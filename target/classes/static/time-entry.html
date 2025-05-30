@@ -1,0 +1,26 @@
+<!--@author EK-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zeiterfassung</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<nav>
+  <a href="dashboard.html">Zurück zur Übersicht</a>
+  <button onclick="logout()">Logout</button>
+</nav>
+<main>
+  <h2>Zeiteintrag erstellen</h2>
+  <form id="time-entry-form">
+    <input type="date" id="date" required />
+    <input type="time" id="start" required />
+    <input type="time" id="end" required />
+    <input type="number" id="break" placeholder="Pause in Minuten" min="0" />
+    <button type="submit">Speichern</button>
+  </form>
+  <p id="feedback" class="success hidden"></p>
+</main>
+</body>
+</html>
