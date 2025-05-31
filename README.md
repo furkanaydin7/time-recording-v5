@@ -1,98 +1,152 @@
-# Backend
+# IT Projekt "Time Recording" - Backend
+
+**Projektgruppe:** Kernel Panic
+**Projektname:** Time Recording System
+**Mitglieder:** Ece Kaya, Furkan Aydin [cite: 2]
+
+## 1. Einleitung
 
 
+Das Time Recording System ist eine webbasierte Anwendung zur Erfassung von Arbeitszeiten, Projektverwaltung und zur Beantragung sowie Genehmigung von Abwesenheiten. Es unterstützt sowohl die Live-Zeiterfassung per Timer als auch die manuelle Nacherfassung. Für Administratoren sind erweiterte Funktionen zur Benutzer- und Systemverwaltung, einschliesslich eines Backup-Mechanismus, verfügbar.
 
-## Getting started
+**Zielgruppen:**
+* **Mitarbeiter:** Erfassen Arbeitszeiten und beantragen Abwesenheiten. [cite: 18]
+* **Manager:** Sehen Zeiten und Abwesenheiten ihrer Teammitglieder ein, verwalten Projekte und genehmigen Abwesenheitsanträge. 
+* **Administratoren:** Haben vollen Zugriff auf alle Systemfunktionen, einschliesslich Benutzerverwaltung, Systemkonfiguration und Datensicherung. 
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 2. Installationsanweisung
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Um das Time Recording System lokal auszuführen und zu testen, sind folgende Komponenten und Schritte erforderlich.
 
-## Add your files
+### 2.1 Systemvoraussetzungen
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+* **Docker Desktop:** Eine installierte und laufende Version wird benötigt, um die PostgreSQL-Datenbank in einem Container zu betreiben. Herunterladbar von [docker.com](https://www.docker.com/).
+* **Java Development Kit (JDK):** Eine aktuelle Version (Version 17 oder höher) muss installiert sein, um die Anwendung auszuführen.
+* **Webbrowser:** Ein aktueller Webbrowser (z.B. Chrome, Firefox, Edge, Safari) für den Zugriff auf die Benutzeroberfläche der Anwendung.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.fhnw.ch/kernel-panic/backend.git
-git branch -M main
-git push -uf origin main
-```
+### 2.2 Zugriff auf den Quellcode
 
-## Integrate with your tools
+Der gesamte Quellcode ist im GitLab-Repository verfügbar. Sie können das Repository klonen, um den Quellcode einzusehen oder die Anwendung direkt aus einer Entwicklungsumgebung zu starten.
 
-- [ ] [Set up project integrations](https://gitlab.fhnw.ch/kernel-panic/backend/-/settings/integrations)
+**GitLab Repository Link:** `https://gitlab.fhnw.ch/kernel-panic/backend.git`
 
-## Collaborate with your team
+### 2.3 Lokale Inbetriebnahme
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+Die Inbetriebnahme des Time Recording Systems für eine lokale Ausführung umfasst folgende Schritte: 
 
-## Test and Deploy
+#### 2.3.1 PostgreSQL-Datenbank mittels Docker starten
 
-Use the built-in continuous integration in GitLab.
+1.  **Docker Desktop herunterladen und installieren:** Falls noch nicht geschehen, laden Sie Docker Desktop von [docker.com](https://www.docker.com/) herunter und installieren Sie es.
+2.  **Docker starten:** Stellen Sie sicher, dass Docker Desktop auf Ihrem System gestartet ist und läuft.
+3.  **PostgreSQL-Container zum ersten Mal ausführen:** Öffnen Sie ein Terminal (CMD oder PowerShell unter Windows, Terminal unter macOS/Linux) und führen Sie folgenden Befehl aus:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+    ```bash
+    docker run --name timerecording-postgres \
+    -e POSTGRES_DB=timerecording \
+    -e POSTGRES_USER=timerecording_user \
+    -e POSTGRES_PASSWORD=secure_password123 \
+    -p 5432:5432 \
+    -v timerecording_data:/var/lib/postgresql/data \
+    -d postgres:15
+    ```
 
-***
+    *Hinweis: Dies erstellt den Container und startet die Datenbank. Die Daten werden in einem Docker-Volume namens `timerecording_data` gespeichert.*
 
-# Editing this README
+4.  **PostgreSQL-Container nachfolgend starten:** Wenn der Container bereits einmal erstellt wurde, können Sie ihn für zukünftige Nutzungen einfach starten: 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+    ```bash
+    docker start timerecording-postgres
+    ```
 
-## Suggestions for a good README
+5.  **PostgreSQL-Container stoppen:** Um den Datenbank-Container zu beenden:
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+    ```bash
+    docker stop timerecording-postgres
+    ```
 
-## Name
-Choose a self-explaining name for your project.
+#### 2.3.2 Time Recording Backend-Anwendung starten
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Sie haben zwei Optionen, um die Backend-Anwendung zu starten:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**Option A: Ausführung der Anwendung über Docker (empfohlen für einfache Inbetriebnahme)**
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Diese Option nutzt ein vorgefertigtes Docker-Image der Anwendung. Ein Docker Account ist nötig.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+1.  **Stellen Sie sicher, dass Java (JRE/JDK Version 17 oder höher) installiert ist.** 
+2.  **Führen Sie folgende Befehle Schritt für Schritt im Terminal/CMD aus:**
+    * **Schritt 1: Docker Login**
+        ```bash
+        docker login
+        ```
+    * **Schritt 2: Docker Image herunterladen**
+        * **Windows:**
+            ```bash
+            docker pull pdunkel/kernalpanic-timerecording:latest 
+            ```
+        * **Linux/Mac:**
+            ```bash
+            docker pull --platform linux/amd64 pdunkel/kernalpanic-timerecording:latest 
+            ```
+    * **Schritt 3: Docker Container starten (Backend-Anwendung)**
+        * **Windows:**
+            ```bash
+            docker run -d -p 8080:8080 -e \
+            SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/timerecording" \
+            -e SPRING_DATASOURCE_USERNAME="timerecording_user" \
+            -e SPRING_DATASOURCE_PASSWORD="secure_password123" \
+            --name kernelpanic pdunkel/kernalpanic-timerecording:latest 
+            ```
+        * **Linux/Mac:**
+            ```bash
+            docker run -d \
+            --platform linux/amd64 \
+            -p 8080:8080 \
+            -e SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/timerecording" \
+            -e SPRING_DATASOURCE_USERNAME="timerecording_user" \
+            -e SPRING_DATASOURCE_PASSWORD="secure_password123" \
+            --name kernelpanic pdunkel/kernalpanic-timerecording:latest 
+            ```
+    * **Schritt 4: Docker Compose Up (falls vorhanden und genutzt)**
+        ```bash
+        docker compose up [cite: 27]
+        ```
+        *(Dieser Schritt ist nur relevant, falls eine `docker-compose.yml` Datei im Projekt existiert und verwendet wird, um mehrere Dienste gleichzeitig zu starten. Das vorherige `docker run` startet nur den Backend-Container.)*
+    * **Schritt 5: Im Webbrowser auf localhost:8080 navigieren.** 
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**Option B: Ausführung aus einer Entwicklungsumgebung (IDE) (für Code-Inspektion)**
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Diese Option ermöglicht es Ihnen, den Code direkt in einer IDE zu prüfen und die Anwendung von dort zu starten.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1.  **Entwicklungsumgebung (IDE) installieren:** Eine IDE wie IntelliJ IDEA, Eclipse oder VS-Code mit Java- und Maven-Unterstützung ist erforderlich.
+2.  **Projekt öffnen:** Öffnen Sie das Projekt in Ihrer bevorzugten IDE. [cite: 29]
+3.  **Hauptklasse finden:** Suchen Sie die Hauptklasse `TimeRecordingBackendApplication.java` (typischerweise im Verzeichnis `src/main/java/ch/fhnw/timerecordingbackend/`). 
+4.  **Anwendung starten:** Klicken Sie mit der rechten Maustaste auf die Datei und wählen Sie "Run 'TimeRecordingBackendApplication.main()'". Ihre IDE kompiliert dann den Code und startet die Anwendung. [cite: 30, 31]
+5.  **Im Webbrowser auf localhost:8080 navigieren.**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+#### 2.3.3 Auf die Anwendung im Browser zugreifen
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Nachdem sowohl der PostgreSQL-Container als auch die Time Recording Backend-Anwendung erfolgreich gestartet wurden, öffnen Sie einen Webbrowser und geben Sie die folgende Adresse in die Adresszeile ein: `http://localhost:8080`
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Sie sollten nun die Login-Seite des Time Recording Systems sehen. 
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 2.4 Demo-Anmeldedaten
 
-## License
-For open source projects, say how it is licensed.
+Für Testzwecke können folgende Demo-Anmeldedaten verwendet werden, die durch Klick auf die Rolle auf der Login-Seite automatisch in die Felder übernommen werden können: 
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+* **Admin:** `admin@timerecording.ch` / `admin123` 
+* **Manager:** `manager@timerecording.ch` / `manager123` 
+* **Mitarbeiter:** `anna.schmidt@timerecording.ch` / `employee123` 
 
-docker pull pdunkel/kernalpanic-timerecording:latest
+## 3. Projektdetails & Kernfunktionen
 
-docker run -d -p 8080:8080
-  -e SPRING_DATASOURCE_URL="jdbc:postgresql://host.docker.internal:5432/timerecording" -e SPRING_DATASOURCE_USERNAME="timerecording_user" -e SPRING_DATASOURCE_PASSWORD="secure_password123" --name kernelpanic pdunkel/kernalpanic-timerecording:latest
+Das Time Recording System bietet folgende Hauptfunktionen:
+
+* **Zeiterfassung:** Live-Zeiterfassung per Timer und manuelle Nacherfassung von Arbeitszeiten. 
+* **Abwesenheiten:** Beantragung und Genehmigung von Abwesenheitsanträgen (Urlaub, Krankheit, etc.). 
+* **Projektverwaltung:** Zuordnung von Arbeitszeiten zu Projekten, Erstellung und Bearbeitung von Projekten. 
+* **Benutzerverwaltung:** Registrierung, Anmeldung, Passwortänderung, Benutzer- und globale Abwesenheitsverwaltung (für Admins). 
+* **Datensicherung (Backup):** Manuelle und automatisierte Backups im JSON-Format, täglich um 02:00 Uhr nachts. 
+
+---
+
+**Wichtiger Hinweis:** Diese ZIP-Datei enthält den vollständigen Quellcode (`src/`), eine ausführbare JAR-Datei (`your_application.jar`, falls zutreffend), den Datenbank-Dump und diese `README.md`. Der Dozent kann den Code in einer IDE prüfen (`Option B`) oder die Anwendung über Docker starten (`Option A`).
